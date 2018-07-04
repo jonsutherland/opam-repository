@@ -1,0 +1,29 @@
+opam-version: "2.0"
+maintainer: "frederic.bour@lakaban.net"
+authors: [
+  "Frédéric Bour <frederic.bour@lakaban.net>"
+  "Alain Frisch <alain.frisch@lexifi.com>"
+]
+homepage: "https://github.com/let-def/ppx_tools_versioned"
+bug-reports: "https://github.com/let-def/ppx_tools_versioned/issues"
+license: "MIT"
+tags: "syntax"
+dev-repo: "git://github.com/let-def/ppx_tools_versioned.git"
+build: [make "all"]
+install: [make "install"]
+remove: ["ocamlfind" "remove" "ppx_tools_versioned"]
+depends: [
+  "ocaml" {>= "4.02.0"}
+  "ocamlfind" {>= "1.5.0"}
+  "ocaml-migrate-parsetree" {>= "1.0.7"}
+]
+synopsis: "A variant of ppx_tools based on ocaml-migrate-parsetree"
+flags: light-uninstall
+url {
+  src: "https://github.com/ocaml-ppx/ppx_tools_versioned/archive/5.1.tar.gz"
+  checksum: [
+    "md5=e48cc87d6da6c2f3020fd8dfe8fe50de"
+    "sha256=f0bae578388eaf0f6088b5ee7bc6cbc8da0f269387b7f35400685593f79b5c61"
+    "sha512=b3412dc204ed3aed42c99f0e900108f5003a96e39b3a78df279c5e9512f14ceb77dde2ff2d552fb0386d43a5f276feca3bd306286a860e13680c94d39421125d"
+  ]
+}
