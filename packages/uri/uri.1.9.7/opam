@@ -16,17 +16,16 @@ tags: [
   "org:xapi-project"
 ]
 build: [
-  ["jbuilder" "subst"] {pinned}
+  ["jbuilder" "subst" "-p" name] {pinned}
   ["jbuilder" "build" "-p" name "-j" jobs]
   ["jbuilder" "runtest" "-p" name "-j" jobs] {with-test}
 ]
 depends: [
   "ocaml" {>= "4.03.0"}
-  "base-bytes"
   "jbuilder" {build & >= "1.0+beta7"}
   "ounit" {with-test & >= "1.0.2"}
   "ppx_sexp_conv" {>= "v0.9.0"}
-  "re"
+  "re" {>= "1.7.2"}
   "sexplib" {>= "v0.9.0"}
   "stringext" {>= "1.4.0"}
 ]
@@ -36,10 +35,10 @@ This is an OCaml implementation of the [RFC3986](http://tools.ietf.org/html/rfc3
 for parsing URI or URLs."""
 url {
   src:
-    "https://github.com/mirage/ocaml-uri/releases/download/v1.9.6/uri-1.9.6.tbz"
+    "https://github.com/mirage/ocaml-uri/releases/download/v1.9.7/uri-1.9.7.tbz"
   checksum: [
-    "md5=a6c4fbbe8e3fd84059fac7bd7bc7b3d2"
-    "sha256=e04fc2c349663e9d1ad81b82a316413dd434d2f72fe62963249183d3782e04d5"
-    "sha512=a34aec5ccde67e2a03b39004d7e03174145621319c6b9596be1e55ac8b78c2beccd194ea7e9457df8fbf8fa62d92f26bdc6b57e1fe34840422f7b7ea6eb93832"
+    "md5=2fb8da55f99a529bcb211a1d99822419"
+    "sha256=a7ab6aa44232e03317b0db2ea200f422587bf801540755896ad30d17d8b682a8"
+    "sha512=d63a5e382f5b101042ba3af58e16a09748f3a7fc37a675e33ef545e1bcd85e963b92f3a40d224465743fa2538b5bb7abc9234904df44c1edc084da417e1188e5"
   ]
 }

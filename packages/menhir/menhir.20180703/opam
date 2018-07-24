@@ -23,10 +23,10 @@ depends: [
 ]
 synopsis: "LR(1) parser generator"
 url {
-  src: "http://gallium.inria.fr/~fpottier/menhir/menhir-20180530.tar.gz"
+  src: "http://gallium.inria.fr/~fpottier/menhir/menhir-20180703.tar.gz"
   checksum: [
-    "md5=81a1878e1d73fec2ede859bd20538d1f"
-    "sha256=a8cb2326790cf701b84966ea7aec644b67c0ed80293961a2b3a07082b7a05aa2"
-    "sha512=10fbd0bc48ca3ffab5b3b9337d662d70b4dc8e7662081a6ecebf54f4f58ceca6dcddc99655791791b8ed6a6aecf51fca2d763d9e3f974a18fcd54e823eb9aab6"
+    "md5=d51c0a529f02baf414fb269a9d240077"
+    "sha256=ab5f16632e81fb67844becde994dbdd6fd875b3a9c799a275af8083f4f2d9b9b"
+    "sha512=855deb6cf4a62da2fc80ff8381bd284d35dc0d3a27306f5ab5f0a68e0621eec61e9b438c89af5e4a868d2bf8d3b297d4d495687294e503de4a8a40eaca548efd"
   ]
 }
