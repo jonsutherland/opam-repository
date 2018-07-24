@@ -1,6 +1,6 @@
 #! /bin/sh
 
-alpine_version=3.7
+alpine_version=3.8
 hidapi_version=0.8.0_rc1
 
 ocaml_version=4.06.1
