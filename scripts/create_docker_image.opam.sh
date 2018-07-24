@@ -26,7 +26,7 @@ echo
 echo "### Building minimal opam image..."
 echo
 
-cp -a "$build_dir"/opam-$opam_alpine_version-r4.apk \
+cp -a "$build_dir"/opam-$opam_version-r4.apk \
       "$build_dir"/hidapi-dev-$hidapi_version-r0.apk \
       "$build_dir"/keys/ \
       "$tmp_dir"
@@ -39,16 +39,16 @@ FROM $minimal_image
 
 COPY keys /etc/apk/keys/
 COPY hidapi-dev-$hidapi_version-r0.apk .
-COPY opam-$opam_alpine_version-r4.apk .
+COPY opam-$opam_version-r4.apk .
 
 USER root
 RUN apk --no-cache add \
         build-base bash perl xz m4 git curl tar rsync patch jq \
         ncurses-dev gmp-dev libev-dev \
         hidapi-dev-$hidapi_version-r0.apk \
-        opam-$opam_alpine_version-r4.apk && \
+        opam-$opam_version-r4.apk && \
     rm hidapi-dev-$hidapi_version-r0.apk \
-       opam-$opam_alpine_version-r4.apk
+       opam-$opam_version-r4.apk
 
 USER tezos
 WORKDIR /home/tezos

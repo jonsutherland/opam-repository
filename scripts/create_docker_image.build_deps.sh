@@ -26,7 +26,7 @@ echo
 echo "### Building build-dependencies image..."
 echo
 
-cp -a "$build_dir"/opam-$opam_alpine_version-r4.apk \
+cp -a "$build_dir"/opam-$opam_version-r4.apk \
       "$build_dir"/hidapi-dev-$hidapi_version-r0.apk \
       "$build_dir"/keys/ \
       "$tmp_dir"

@@ -2,8 +2,8 @@
 # Maintainer: Anil Madhavapeddy <anil@recoil.org>
 # FIXME: lib-ext downloads dependencies; package them and use system-provided!
 pkgname=opam
-pkgver=2.0.0_rc3
-pkgtag=2.0.0-rc3
+pkgver=2.0.0
+pkgtag=2.0.0-rc4
 pkgrel=4
 pkgdesc="OCaml Package Manager"
 url="https://opam.ocaml.org"
@@ -12,8 +12,8 @@ license="LGPL-3.0"
 depends="curl tar unzip rsync patch"
 makedepends="ocaml"
 subpackages="$pkgname-doc"
-source="https://github.com/ocaml/$pkgname/releases/download/$pkgtag/$pkgname-full-$pkgtag.tar.gz"
-builddir="$srcdir/$pkgname-full-$pkgtag"
+source="https://github.com/ocaml/$pkgname/releases/download/$pkgtag/$pkgname-full-$pkgver.tar.gz"
+builddir="$srcdir/$pkgname-full-$pkgver"
 
 build() {
 	cd "$builddir"
@@ -37,4 +37,4 @@ package() {
 	make DESTDIR="$pkgdir" install
 }
 
-sha512sums="b4926a52b318d4e4b56ff17caaed3f6d7fb2eaa31510437357234df43ba318f40fe784ec5a840a93d1865c55ba70327f16277d06fe374539b43c69d07361384e  opam-full-2.0.0-rc3.tar.gz"
+sha512sums="52578df202bbf97ff2c0b87d026080315ce4b7cd6ee8e25f25303cb3ced504ed36279df357bd3fc2e6339832247d7358c40b3075fe64ccc507704b1403c0c3a6  opam-full-2.0.0.tar.gz"
