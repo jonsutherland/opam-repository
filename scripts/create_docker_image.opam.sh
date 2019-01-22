@@ -57,8 +57,10 @@ COPY --chown=tezos:nogroup opam-repository/repo opam-repository/
 
 COPY --chown=tezos:nogroup \
       opam-repository/packages/ocaml \
+      opam-repository/packages/ocaml-config \
       opam-repository/packages/ocaml-base-compiler \
       opam-repository/packages/base-bigarray \
+      opam-repository/packages/base-bytes \
       opam-repository/packages/base-unix \
       opam-repository/packages/base-threads \
       opam-repository/packages/

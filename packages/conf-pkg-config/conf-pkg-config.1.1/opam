@@ -3,7 +3,6 @@ maintainer: "unixjunkie@sdf.org"
 authors: ["Francois Berenger"]
 homepage: "http://www.freedesktop.org/wiki/Software/pkg-config/"
 bug-reports: "https://github.com/ocaml/opam-repository/issues"
-dev-repo: "git://github.com/ocaml/opam-repository"
 license: "GPL"
 build: [
   ["pkg-config" "--help"]
@@ -32,9 +31,8 @@ depexts: [
   ["pkg-config"] {os = "macos" & os-distribution = "homebrew"}
   ["pkgconf"] {os = "freebsd"}
 ]
-synopsis: "Virtual package relying on pkg-config installation."
+synopsis: "Virtual package relying on pkg-config installation"
 description: """
 This package can only install if the pkg-config package is installed
 on the system."""
-depends: ["ocaml"]
-flags: light-uninstall
+flags: conf

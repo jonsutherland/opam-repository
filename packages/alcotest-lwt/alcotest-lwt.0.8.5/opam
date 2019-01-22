@@ -1,0 +1,32 @@
+opam-version: "2.0"
+maintainer:  "thomas@gazagnaire.org"
+authors:     "Thomas Gazagnaire"
+homepage:    "https://github.com/mirage/alcotest/"
+dev-repo:    "git+https://github.com/mirage/alcotest.git"
+bug-reports: "https://github.com/mirage/alcotest/issues/"
+license:     "ISC"
+doc:         "https://mirage.github.io/alcotest/"
+
+build: [
+  ["dune" "subst"] {pinned}
+  ["dune" "build" "-p" name "-j" jobs]
+  ["dune" "runtest" "-p" name "-j" jobs] {with-test}
+]
+
+depends: [
+  "dune"  {build}
+  "ocaml" {>= "4.02.3"}
+  "alcotest"
+  "lwt" "logs"
+]
+
+synopsis: "Lwt-based helpers for Alcotest"
+url {
+  src:
+    "https://github.com/mirage/alcotest/releases/download/0.8.5/alcotest-0.8.5.tbz"
+  checksum: [
+    "md5=2db36741c413ab93391ecc1f983aa804"
+    "sha256=6b3b638fc7c6f4c52617b0261dc9f726ce21bb0c485e05bab6fe41a57697fc6b"
+    "sha512=2d4aaec0a382fb4a883b3dc127e5a62272ecc721f6a1cc0bfe3aebba8bf76efc4bce2e097b2043a8b4b618323162f18d34b610ea8c12787c15210724a7523fa3"
+  ]
+}
