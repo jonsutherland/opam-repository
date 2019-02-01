@@ -30,8 +30,8 @@ url {
   src:
     "https://github.com/mirage/ocaml-uri/releases/download/v2.1.0/uri-v2.1.0.tbz"
   checksum: [
-    "md5=36b973b283cce2f3b31b121eccc5c2d1"
-    "sha256=2d2392e0b639f5cbd4326936bb01b8bb5df9b51e9e51cd09d5bb7443a1cbcf48"
-    "sha512=c4058a9e4e8a79e5735302a0f7a17bd1e7741d6dc8c296d4e74903b216d8771ce93fe7ff871a33b1b0f58c7ce13e4cba65e9a1d439cb625c276f43eb2fe704f7"
+    "md5=a5d9ed86f9f26d7936523afecd623d61"
+    "sha256=ecf51a748d320ede7273f338e18b1d0a86ef0e7e915194e3ebccf945b3afb66b"
+    "sha512=59e4b49f3e0e44aee73acea6c9e1803568bde1c993ad23cc7bf49cd2d5cf36b23d99f6864dd6899e6cd513303c40e84b6f8b11fcd8bd18814681d35e4e693de9"
   ]
 }
