@@ -47,6 +47,7 @@ RUN adduser -S tezos && \
     sed -i.bak 's/^Defaults.*requiretty//g' /etc/sudoers
 
 USER tezos
+ENV USER=tezos
 
 WORKDIR /home/tezos
 
