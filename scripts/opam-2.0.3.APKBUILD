@@ -1,0 +1,42 @@
+# Contributor: Michael Zuo <muh.muhten@gmail.com>
+# Maintainer: Anil Madhavapeddy <anil@recoil.org>
+pkgname=opam
+pkgver=2.0.3
+pkgrel=0
+pkgdesc="OCaml Package Manager"
+url="https://opam.ocaml.org"
+arch="all !x86 !armhf !armv7 !s390x"  # ocaml not avail on excluded platforms
+license="LGPL-2.1"
+depends="curl xz tar unzip rsync patch bubblewrap bash"
+makedepends="ocaml"
+source="https://github.com/ocaml/$pkgname/releases/download/$pkgver/$pkgname-full-$pkgver.tar.gz"
+builddir="$srcdir/$pkgname-full-$pkgver"
+subpackages="$pkgname-doc"
+
+build() {
+	cd "$builddir"
+
+	./configure \
+		--build=$CBUILD \
+		--host=$CHOST \
+		--prefix=/usr \
+		--sysconfdir=/etc \
+		--mandir=/usr/share/man \
+		--infodir=/usr/share/info \
+		--localstatedir=/var
+
+	make -j1 lib-ext
+	make -j1 all
+}
+
+package() {
+	cd "$builddir"
+	make DESTDIR="$pkgdir" install
+}
+
+check() {
+	cd "$builddir"
+	make tests
+}
+
+sha512sums="9cb992bac309a86bd5b7f7a6e11a6da55febaeb41799c937ec666cfa78ac4bdedc76bee02cff60ca9813fb5cfca39c62a403f42a4b9741313e5a2cb8507f8e83  opam-full-2.0.3.tar.gz"
