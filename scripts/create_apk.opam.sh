@@ -10,8 +10,8 @@ cd "$repo_dir"
 
 build_dir=${build_dir:-_docker_build}
 
-if [ -f "$build_dir"/opam-$opam_version-r4.apk ] && \
-   [ -f "$build_dir"/opam-doc-$opam_version-r4.apk ] && \
+if [ -f "$build_dir"/opam-$opam_version-r0.apk ] && \
+   [ -f "$build_dir"/opam-doc-$opam_version-r0.apk ] && \
    [ -d "$build_dir"/keys/ ] ; then
     exit 0
 fi
@@ -52,7 +52,7 @@ mkdir -p "$build_dir"
 
 container=$(docker create $tmp_image:$opam_tag)
 docker cp -L $container:/etc/apk/keys "$build_dir"
-docker cp -L $container:/packages/home/x86_64/opam-$opam_version-r4.apk \
+docker cp -L $container:/packages/home/x86_64/opam-$opam_version-r0.apk \
              "$build_dir"
-docker cp -L $container:/packages/home/x86_64/opam-doc-$opam_version-r4.apk \
+docker cp -L $container:/packages/home/x86_64/opam-doc-$opam_version-r0.apk \
              "$build_dir"
