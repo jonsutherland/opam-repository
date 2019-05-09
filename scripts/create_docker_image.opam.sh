@@ -31,8 +31,11 @@ cp -a "$build_dir"/opam-$opam_version-r0.apk \
       "$build_dir"/keys/ \
       "$tmp_dir"
 
+python_requirements="$script_dir"/python_deps/requirements.txt
+
 mkdir -p "$tmp_dir"/opam-repository
 cp -a packages repo "$tmp_dir"/opam-repository
+cp $python_requirements "$tmp_dir"/python_requirements.txt
 
 cat <<EOF > "$tmp_dir"/Dockerfile
 FROM $minimal_image
@@ -44,11 +47,21 @@ COPY opam-$opam_version-r0.apk .
 USER root
 RUN apk --no-cache add \
         build-base bash perl xz m4 git curl tar rsync patch jq \
+        py-pip python3 python3-dev \
+        py3-sphinx py3-sphinx_rtd_theme \
         ncurses-dev gmp-dev libev-dev \
         hidapi-dev-$hidapi_version-r0.apk \
         opam-$opam_version-r0.apk && \
-    rm hidapi-dev-$hidapi_version-r0.apk \
-       opam-$opam_version-r0.apk
+        rm hidapi-dev-$hidapi_version-r0.apk \
+        opam-$opam_version-r0.apk
+
+COPY python_requirements.txt .
+
+RUN pip install --upgrade pip
+RUN ln -s /usr/bin/sphinx-build-3 /usr/bin/sphinx-build && \
+  pip3 install -r python_requirements.txt && \
+  pip3 uninstall --yes idna && \
+  pip3 install 'idna<2.7'
 
 USER tezos
 WORKDIR /home/tezos
@@ -80,11 +93,11 @@ COPY --chown=tezos:nogroup opam-repository opam-repository
 RUN cd opam-repository && \
        opam admin cache && \
        opam update && \
-       opam install opam-depext
+       opam install opam-depext && \
+       opam clean
 
 ENTRYPOINT [ "opam", "exec", "--" ]
 CMD [ "/bin/sh" ]
 EOF
 
 docker build -t "$image_name:$image_version" "$tmp_dir"
-
