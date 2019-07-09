@@ -1,0 +1,30 @@
+opam-version: "2.0"
+name: "bitv"
+maintainer: "filliatr@lri.fr"
+authors: "Jean-Christophe Filliâtre"
+homepage: "https://www.lri.fr/~filliatr/software.en.html"
+dev-repo: "git+https://github.com/backtracking/bitv.git"
+bug-reports: "https://github.com/backtracking/bitv/issues"
+license: "LGPL v2"
+build: [
+  ["autoconf"]
+  ["./configure"]
+  [make]
+]
+install: [make "install"]
+remove: ["ocamlfind" "remove" "bitv"]
+depends: [
+  "ocaml" {>= "4.02.0"}
+  "ocamlfind" {build}
+  "conf-autoconf" {build}
+]
+synopsis: "A bit vector library"
+flags: light-uninstall
+url {
+  src: "https://github.com/backtracking/bitv/archive/1.3.tar.gz"
+  checksum: [
+    "md5=5f376821b7588807b3e4441e8c330ed2"
+    "sha256=f93f927c29d03e8e8b5bf09064959e9dee0a00fb20ba0e12f363a280dc3ddd6f"
+    "sha512=aac53d86f3160421791dccc03dd86864316c3b7b7d841bbd860d31c6d53624a7082b98cbfe15dc5a584ad1ede817f27f6a36f195a00e9ff03b2f218b73f9980c"
+  ]
+}
