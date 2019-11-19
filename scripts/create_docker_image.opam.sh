@@ -26,8 +26,7 @@ echo
 echo "### Building minimal opam image..."
 echo
 
-cp -a "$build_dir"/opam-$opam_version-r0.apk \
-      "$build_dir"/hidapi-dev-$hidapi_version-r0.apk \
+cp -a "$build_dir"/hidapi-dev-$hidapi_version-r0.apk \
       "$build_dir"/keys/ \
       "$tmp_dir"
 
@@ -42,18 +41,15 @@ FROM $minimal_image
 
 COPY keys /etc/apk/keys/
 COPY hidapi-dev-$hidapi_version-r0.apk .
-COPY opam-$opam_version-r0.apk .
 
 USER root
 RUN apk --no-cache add \
         build-base bash perl xz m4 git curl tar rsync patch jq \
         py-pip python3 python3-dev \
         py3-sphinx py3-sphinx_rtd_theme \
-        ncurses-dev gmp-dev libev-dev \
-        hidapi-dev-$hidapi_version-r0.apk \
-        opam-$opam_version-r0.apk && \
-        rm hidapi-dev-$hidapi_version-r0.apk \
-        opam-$opam_version-r0.apk
+        ncurses-dev gmp-dev libev-dev opam \
+        hidapi-dev-$hidapi_version-r0.apk && \
+        rm hidapi-dev-$hidapi_version-r0.apk
 
 COPY python_requirements.txt .
 

@@ -29,7 +29,7 @@ trap cleanup EXIT INT
 cp -a "$script_dir"/hidapi-$hidapi_version.APKBUILD "$tmp_dir"/APKBUILD
 
 cat <<EOF > "$tmp_dir/Dockerfile"
-FROM andyshinn/alpine-abuild:v4
+FROM andyshinn/alpine-abuild:v9
 ENV PACKAGER "Tezos <ci@tezos.com>"
 WORKDIR /home/builder/
 RUN abuild-keygen -a -i
