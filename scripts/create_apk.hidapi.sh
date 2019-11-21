@@ -10,8 +10,8 @@ cd "$repo_dir"
 
 build_dir=${build_dir:-_docker_build}
 
-if [ -f "$build_dir"/hidapi-$hidapi_version-r0.apk ] && \
-   [ -f "$build_dir"/hidapi-dev-$hidapi_version-r0.apk ] && \
+if [ -f "$build_dir"/hidapi-$hidapi_version.apk ] && \
+   [ -f "$build_dir"/hidapi-dev-$hidapi_version.apk ] && \
    [ -d "$build_dir"/keys/ ] ; then
     exit 0
 fi
