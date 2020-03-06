@@ -22,7 +22,7 @@ RUN apk --no-cache add \
         build-base bash perl xz m4 git curl tar rsync patch jq \
         ncurses-dev gmp-dev libev-dev opam \
         openssl-dev \
-        hidapi-dev libffi-dev cargo
+        hidapi-dev libffi-dev zlib-dev cargo
 
 # Check versions of other interpreters/compilers
 RUN test $(rustc --version | cut -d' ' -f2) = ${RUST_VERSION}
