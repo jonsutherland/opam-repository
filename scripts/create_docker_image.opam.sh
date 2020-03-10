@@ -45,7 +45,7 @@ COPY hidapi-dev-$hidapi_version-r0.apk .
 USER root
 RUN apk --no-cache add \
         build-base bash perl xz m4 git curl tar rsync patch jq \
-        py-pip python3 python3-dev \
+        py-pip python3 python3-dev coreutils \
         py3-sphinx py3-sphinx_rtd_theme \
         ncurses-dev gmp-dev libev-dev opam \
         hidapi-dev-$hidapi_version-r0.apk && \
