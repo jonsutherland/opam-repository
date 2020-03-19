@@ -1,12 +1,13 @@
 opam-version: "2.0"
-synopsis: "Official release 4.09.0"
+synopsis:
+  "Official release 4.09.1, with frame-pointers and flambda activated"
 maintainer: "platform@lists.ocaml.org"
 authors: "Xavier Leroy and many contributors"
 homepage: "https://ocaml.org"
 bug-reports: "https://github.com/ocaml/ocaml/issues"
 dev-repo: "git://github.com/ocaml/ocaml"
 depends: [
-  "ocaml" {= "4.09.0" & post}
+  "ocaml" {= "4.09.1" & post}
   "base-unix" {post}
   "base-bigarray" {post}
   "base-threads" {post}
@@ -15,26 +16,28 @@ conflict-class: "ocaml-core-compiler"
 flags: compiler
 setenv: CAML_LD_LIBRARY_PATH = "%{lib}%/stublibs"
 build: [
+  ["./configure" "--prefix=%{prefix}%"
+                 "--enable-frame-pointers" "--enable-flambda"]
+    {os != "openbsd" & os != "freebsd" & os != "macos"}
   [
     "./configure"
     "--prefix=%{prefix}%"
-    "-C"
-    "CC=cc" {os = "openbsd" | os = "freebsd" | os = "macos"}
-    "ASPP=cc -c" {os = "openbsd" | os = "freebsd" | os = "macos"}
-  ]
+    "CC=cc"
+    "ASPP=cc -c"
+    "--enable-frame-pointers"
+    "--enable-flambda"
+  ] {os = "openbsd" | os = "freebsd" | os = "macos"}
   [make "-j%{jobs}%" {os != "cygwin"} "world"]
   [make "-j%{jobs}%" {os != "cygwin"} "world.opt"]
 ]
 install: [make "install"]
 url {
-  src: "https://github.com/ocaml/ocaml/archive/4.09.0.tar.gz"
+  src: "https://github.com/ocaml/ocaml/archive/4.09.1.tar.gz"
   checksum: [
-    "md5=76ac39570fc88b16fda2a94db7cd5cf3"
-    "sha256=a7bc044167e7d09f8e3ea84b88ec9d81392908ecdac861d3d5015e5f0fc496a3"
-    "sha512=dc0271e591bf929b751705835790949a9d741e12d085c8b207c3689b5838a02ea8de80da8b2605d2e6744f2f541b0d1694ffafff9509e99ce01f3a391f6ef2ae"
+    "sha256=3e3146e0c876d14bdd574cb543e782feb2b07a7cabd054a8f322ef40de61943a"
+    "sha512=81fe1b14f4245b474ff8e3236b824c798d5134fbb143eef946bb38e66102a224ec7bf01b4a232f4cd7fc62e2ad5932ee190e70f5b6aac409d38fd8384ed6ee7c"
   ]
 }
-extra-files: ["ocaml-base-compiler.install" "md5=3e969b841df1f51ca448e6e6295cb451"]
 post-messages: [
   "A failure in the middle of the build may be caused by build parallelism
    (enabled by default).

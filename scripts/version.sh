@@ -3,4 +3,4 @@
 alpine_version=3.10
 hidapi_version=0.9.0
 
-ocaml_version=4.09.0
+ocaml_version=4.09.1
