@@ -33,13 +33,9 @@ cp -a "$build_dir"/hidapi-dev-$hidapi_version-r0.apk \
 mkdir -p "$tmp_dir"/opam-repository
 cp -a packages repo "$tmp_dir"/opam-repository
 
-cat <<EOF > "$tmp_dir"/Dockerfile
-FROM $opam_image
-
-RUN opam depext --update --yes \$(opam list --all --short | grep -v ocaml-variants) && \
-    opam install --yes \$(opam list --all --short | grep -v ocaml-variants)
-
-EOF
-
-docker build -t "$image_name:$image_version" "$tmp_dir"
+cp $script_dir/Dockerfile_build_deps.template $tmp_dir/Dockerfile
+docker build \
+       --build-arg BUILD_IMAGE=${opam_image} \
+       -t "$image_name:$image_version" \
+       $tmp_dir
 

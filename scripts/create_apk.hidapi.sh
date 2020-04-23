@@ -28,14 +28,7 @@ trap cleanup EXIT INT
 
 cp -a "$script_dir"/hidapi-$hidapi_version.APKBUILD "$tmp_dir"/APKBUILD
 
-cat <<EOF > "$tmp_dir/Dockerfile"
-FROM andyshinn/alpine-abuild:v9
-ENV PACKAGER "Tezos <ci@tezos.com>"
-WORKDIR /home/builder/
-RUN abuild-keygen -a -i
-COPY APKBUILD .
-RUN abuilder -r
-EOF
+cp $script_dir/Dockerfile_hidapi.template $tmp_dir/Dockerfile
 
 echo
 echo "### Building hidapi..."
@@ -46,7 +39,8 @@ docker pull $tmp_image:$hidapi_version || true > /dev/null 2>&1
 
 docker build \
        --cache-from $tmp_image:$hidapi_version \
-       -t $tmp_image:$hidapi_version "$tmp_dir"
+       -t $tmp_image:$hidapi_version \
+       "$tmp_dir"
 
 mkdir -p "$build_dir"
 

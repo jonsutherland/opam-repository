@@ -36,64 +36,10 @@ mkdir -p "$tmp_dir"/opam-repository
 cp -a packages repo "$tmp_dir"/opam-repository
 cp $python_requirements "$tmp_dir"/python_requirements.txt
 
-cat <<EOF > "$tmp_dir"/Dockerfile
-FROM $minimal_image
-
-COPY keys /etc/apk/keys/
-COPY hidapi-dev-$hidapi_version-r0.apk .
-
-USER root
-RUN apk --no-cache add \
-        build-base bash perl xz m4 git curl tar rsync patch jq \
-        py-pip python3 python3-dev coreutils \
-        py3-sphinx py3-sphinx_rtd_theme \
-        ncurses-dev gmp-dev libev-dev opam \
-        hidapi-dev-$hidapi_version-r0.apk && \
-        rm hidapi-dev-$hidapi_version-r0.apk
-
-COPY python_requirements.txt .
-
-RUN pip install --upgrade pip
-RUN ln -s /usr/bin/sphinx-build-3 /usr/bin/sphinx-build && \
-  pip3 install -r python_requirements.txt && \
-  pip3 uninstall --yes idna && \
-  pip3 install 'idna<2.7'
-
-USER tezos
-WORKDIR /home/tezos
-
-COPY --chown=tezos:nogroup opam-repository/repo opam-repository/
-
-COPY --chown=tezos:nogroup \
-      opam-repository/packages/ocaml \
-      opam-repository/packages/ocaml-config \
-      opam-repository/packages/ocaml-base-compiler \
-      opam-repository/packages/base-bigarray \
-      opam-repository/packages/base-bytes \
-      opam-repository/packages/base-unix \
-      opam-repository/packages/base-threads \
-      opam-repository/packages/
-
-RUN cd opam-repository && opam admin cache
-
-RUN mkdir ~/.ssh && \
-    chmod 700 ~/.ssh && \
-    git config --global user.email "ci@tezos.com" && \
-    git config --global user.name "Tezos CI" && \
-    opam init --disable-sandboxing --no-setup --yes \
-              --compiler ocaml-base-compiler.${ocaml_version} \
-              tezos /home/tezos/opam-repository
-
-COPY --chown=tezos:nogroup opam-repository opam-repository
-
-RUN cd opam-repository && \
-       opam admin cache && \
-       opam update && \
-       opam install opam-depext && \
-       opam clean
-
-ENTRYPOINT [ "opam", "exec", "--" ]
-CMD [ "/bin/sh" ]
-EOF
-
-docker build -t "$image_name:$image_version" "$tmp_dir"
+cp $script_dir/Dockerfile_opam.template $tmp_dir/Dockerfile
+docker build \
+       --build-arg BUILD_IMAGE=${minimal_image} \
+       --build-arg OCAML_VERSION=${ocaml_version} \
+       --build-arg HIDAPI_VERSION=${hidapi_version} \
+       -t "$image_name:$image_version" \
+       $tmp_dir
