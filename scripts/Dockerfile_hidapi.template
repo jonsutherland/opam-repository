@@ -1,6 +1,0 @@
-FROM andyshinn/alpine-abuild:v9
-ENV PACKAGER "Tezos <ci@tezos.com>"
-WORKDIR /home/builder/
-RUN abuild-keygen -a -i
-COPY APKBUILD .
-RUN abuilder -r

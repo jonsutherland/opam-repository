@@ -2,7 +2,6 @@ ARG BUILD_IMAGE
 
 FROM ${BUILD_IMAGE}
 
-ARG HIDAPI_VERSION
 ARG IMAGE_VERSION
 
 # Metadata
@@ -18,11 +17,7 @@ LABEL org.label-schema.vendor="Nomadic Labs" \
       distro_long="alpine-$alpine_version" \
       arch="x86_64" operatingsystem="linux"
 
-COPY hidapi-${HIDAPI_VERSION}-r0.apk .
-COPY keys /etc/apk/keys/
-
-RUN apk --no-cache add libev gmp sudo hidapi-${HIDAPI_VERSION}-r0.apk && \
-    rm hidapi-${HIDAPI_VERSION}-r0.apk
+RUN apk --no-cache add libev gmp sudo hidapi
 
 RUN adduser -S tezos && \
     echo 'tezos ALL=(ALL:ALL) NOPASSWD:ALL' > /etc/sudoers.d/tezos && \
