@@ -12,27 +12,26 @@ RUN apk --no-cache add \
         ncurses-dev gmp-dev libev-dev opam \
         hidapi-dev
 
-COPY python_requirements.txt .
+COPY scripts/python_deps/requirements.txt ./python_requirements.txt
 
 RUN pip install --upgrade pip
-RUN ln -s /usr/bin/sphinx-build-3 /usr/bin/sphinx-build && \
-  pip3 install -r python_requirements.txt && \
+RUN pip3 install -r python_requirements.txt && \
   pip3 uninstall --yes idna && \
   pip3 install 'idna<2.7'
 
 USER tezos
 WORKDIR /home/tezos
 
-COPY --chown=tezos:nogroup opam-repository/repo opam-repository/
+COPY --chown=tezos:nogroup repo opam-repository/
 
 COPY --chown=tezos:nogroup \
-      opam-repository/packages/ocaml \
-      opam-repository/packages/ocaml-config \
-      opam-repository/packages/ocaml-base-compiler \
-      opam-repository/packages/base-bigarray \
-      opam-repository/packages/base-bytes \
-      opam-repository/packages/base-unix \
-      opam-repository/packages/base-threads \
+      packages/ocaml \
+      packages/ocaml-config \
+      packages/ocaml-base-compiler \
+      packages/base-bigarray \
+      packages/base-bytes \
+      packages/base-unix \
+      packages/base-threads \
       opam-repository/packages/
 
 RUN cd opam-repository && opam admin cache
@@ -45,7 +44,7 @@ RUN mkdir ~/.ssh && \
               --compiler ocaml-base-compiler.${OCAML_VERSION} \
               tezos /home/tezos/opam-repository
 
-COPY --chown=tezos:nogroup opam-repository opam-repository
+COPY --chown=tezos:nogroup packages opam-repository/packages
 
 RUN cd opam-repository && \
        opam admin cache && \
