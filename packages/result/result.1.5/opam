@@ -16,10 +16,11 @@ Projects that want to use the new result type defined in OCaml >= 4.03
 while staying compatible with older version of OCaml should use the
 Result module defined in this library."""
 url {
-  src: "https://github.com/janestreet/result/archive/1.4.tar.gz"
+  src:
+    "https://github.com/janestreet/result/releases/download/1.5/result-1.5.tbz"
   checksum: [
-    "md5=d3162dbc501a2af65c8c71e0866541da"
-    "sha256=167029f0d0475106200697f3dffda20b2462a345fe35b449fe86f1f92db354b2"
-    "sha512=2e709fee6ceb54463c3989a90aed351c5b48f7a5edce9ccbba4d163cbfb795a19393be0d75885e762d4609961a64e273bb298b94bd3858dc2c20de9396b655d3"
+    "md5=1b82dec78849680b49ae9a8a365b831b"
+    "sha256=7c3a5e238558f4c1a4f5acca816bc705a0e12f68dc0005c61ddbf2e6cab8ee32"
+    "sha512=4dfabc121fd69b3e0fe742f4da483830104d8fedf5ad3d83b4fb3efa2d544cb05eadc8719960b24bdf5760bff3434c5225f280339d70af9fb2842f3efe1bb87b"
   ]
 }
