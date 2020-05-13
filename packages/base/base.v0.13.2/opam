@@ -31,10 +31,10 @@ provided by companion libraries such as stdio:
   https://github.com/janestreet/stdio
 "
 url {
-  src: "https://github.com/janestreet/base/archive/v0.13.1.tar.gz"
+  src: "https://github.com/janestreet/base/archive/v0.13.2.tar.gz"
   checksum: [
-    "md5=296457416f9a8b75e6edfc3b1140e384"
-    "sha256=f2dc50c724669b278428cc4c9c742f754049ebe59537b984377b0a777e677b50"
-    "sha512=47a8e5c4159f0b2bc31e443749aeb1782a1a56c931b951e96cea764237ed6d450b991eeb2994cfb30f6e55fb571e2a20549a21a2b4e66a76ba745af286214c12"
+    "md5=f43ce18d98fd0879e77ff671e077e607"
+    "sha256=fc5d761a46ec328418c97779cba3ea7231d1632cefac651679cd4ede26f5cd5a"
+    "sha512=69cb5826c59e6671932c09847554c19076693f06296b26bb0aa0a80d1d5c7826cc0bd52f5ef4d906d6bc493bf8d10082d2b80edba003990655a087dde95b3f42"
   ]
 }
