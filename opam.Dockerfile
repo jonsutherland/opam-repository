@@ -10,7 +10,7 @@ RUN apk --no-cache add \
         py-pip python3 python3-dev coreutils \
         py3-sphinx py3-sphinx_rtd_theme \
         ncurses-dev gmp-dev libev-dev opam \
-        hidapi-dev
+        hidapi-dev libffi-dev
 
 COPY scripts/python_deps/requirements.txt ./python_requirements.txt
 
