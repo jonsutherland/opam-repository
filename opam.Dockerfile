@@ -14,6 +14,10 @@ RUN apk --no-cache add \
         hidapi-dev libffi-dev cargo
 
 RUN test $(rustc --version | cut -d' ' -f2) = ${RUST_VERSION}
+COPY rust rust
+RUN RUSTFLAGS='-C target-feature=-crt-static' cargo build --release --manifest-path ./rust/Cargo.toml
+RUN cp rust/target/release/librustzcash.a /usr/lib/
+RUN rm -rf rust
 
 COPY scripts/python_deps/requirements.txt ./python_requirements.txt
 
