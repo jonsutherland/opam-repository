@@ -20,5 +20,6 @@ docker build \
        -f opam.Dockerfile \
        --build-arg BUILD_IMAGE=${minimal_image} \
        --build-arg OCAML_VERSION=${ocaml_version} \
+       --build-arg RUST_VERSION=${rust_version} \
        -t "$image_name:$image_version" \
        $repo_dir

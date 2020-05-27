@@ -3,6 +3,7 @@ ARG BUILD_IMAGE
 FROM ${BUILD_IMAGE}
 
 ARG OCAML_VERSION
+ARG RUST_VERSION
 
 USER root
 RUN apk --no-cache add \
@@ -10,7 +11,9 @@ RUN apk --no-cache add \
         py-pip python3 python3-dev coreutils \
         py3-sphinx py3-sphinx_rtd_theme \
         ncurses-dev gmp-dev libev-dev opam \
-        hidapi-dev libffi-dev
+        hidapi-dev libffi-dev cargo
+
+RUN test $(rustc --version | cut -d' ' -f2) = ${RUST_VERSION}
 
 COPY scripts/python_deps/requirements.txt ./python_requirements.txt
 
