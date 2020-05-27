@@ -27,6 +27,8 @@ RUN adduser -S tezos && \
     mkdir -p /var/run/tezos/node /var/run/tezos/client && \
     sudo chown -R tezos /var/run/tezos
 
+COPY zcash-params /usr/share/zcash-params
+
 USER tezos
 ENV USER=tezos
 
