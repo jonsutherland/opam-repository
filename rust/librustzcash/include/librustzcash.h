@@ -3,7 +3,24 @@
 
 #include <stdint.h>
 
+#ifndef __cplusplus
+  #include <assert.h>
+  #include <stdalign.h>
+#endif
+
+#define ENTRY_SERIALIZED_LENGTH 180
+
+typedef struct HistoryEntry {
+    unsigned char bytes[ENTRY_SERIALIZED_LENGTH];
+}  HistoryEntry;
+static_assert(
+    sizeof(HistoryEntry) == ENTRY_SERIALIZED_LENGTH,
+    "HistoryEntry struct is not the same size as the underlying byte array");
+static_assert(alignof(HistoryEntry) == 1, "HistoryEntry struct alignment is not 1");
+
+#ifdef __cplusplus
 extern "C" {
+#endif
 #ifdef WIN32
     typedef uint16_t codeunit;
 #else
@@ -312,7 +329,7 @@ extern "C" {
         uint32_t cbranch,
         uint32_t t_len,
         const uint32_t *ni_ptr,
-        const unsigned char *n_ptr,
+        const HistoryEntry *n_ptr,
         size_t p_len,
         const unsigned char *nn_ptr,
         unsigned char *rt_ret,
@@ -323,7 +340,7 @@ extern "C" {
         uint32_t cbranch,
         uint32_t t_len,
         const uint32_t *ni_ptr,
-        const unsigned char *n_ptr,
+        const HistoryEntry *n_ptr,
         size_t p_len,
         size_t e_len,
         unsigned char *rt_ret
@@ -334,6 +351,8 @@ extern "C" {
         const unsigned char *n_ptr,
         unsigned char *h_ret
     );
+#ifdef __cplusplus
 }
+#endif
 
 #endif // LIBRUSTZCASH_INCLUDE_H_
