@@ -17,6 +17,8 @@ RUN test $(rustc --version | cut -d' ' -f2) = ${RUST_VERSION}
 COPY rust rust
 RUN RUSTFLAGS='-C target-feature=-crt-static' cargo build --release --manifest-path ./rust/Cargo.toml
 RUN cp rust/target/release/librustzcash.a /usr/lib/
+# Add any required headers
+RUN cp rust/librustzcash/include/librustzcash.h /usr/include/
 RUN rm -rf rust
 
 COPY scripts/python_deps/requirements.txt ./python_requirements.txt
