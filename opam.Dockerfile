@@ -16,9 +16,15 @@ RUN apk --no-cache add \
 RUN test $(rustc --version | cut -d' ' -f2) = ${RUST_VERSION}
 COPY rust rust
 RUN RUSTFLAGS='-C target-feature=-crt-static' cargo build --release --manifest-path ./rust/Cargo.toml
+
+# librustzcash
 RUN cp rust/target/release/librustzcash.a /usr/lib/
-# Add any required headers
 RUN cp rust/librustzcash/include/librustzcash.h /usr/include/
+
+# rustc-bls12-381
+RUN cp rust/rustc-bls12-381/include/rustc_bls12_381.h /usr/include/
+RUN cp rust/target/release/librustc_bls12_381.a /usr/lib/
+
 RUN rm -rf rust
 
 COPY scripts/python_deps/requirements.txt ./python_requirements.txt

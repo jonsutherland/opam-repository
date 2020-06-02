@@ -4,4 +4,5 @@ members = [
     # revision: c7b2fc101dacfb89f30f911852af7dfb1bf952f2
     # plus small tweaks to Cargo.toml
     "librustzcash",
+    "rustc-bls12-381",
 ]
