@@ -10,16 +10,17 @@ depends: [
   "dune" {>= "1.2"}
   "hacl-star-raw" {= version}
   "zarith"
+  "cppo" {build}
 ]
 build: ["dune" "build" "-p" name "-j" jobs]
 run-test: ["dune" "runtest" "-p" name "-j" jobs]
 dev-repo: "git+https://github.com/project-everest/hacl-star.git"
 url {
   src:
-    "https://github.com/project-everest/hacl-star/releases/download/ocaml-v0.1/hacl-star.0.1.tar.gz"
+    "https://github.com/project-everest/hacl-star/releases/download/ocaml-v0.1.1/hacl-star.0.1.1.tar.gz"
   checksum: [
-    "md5=b1c111f4d3e883f427ce7a86bceb985e"
-    "sha512=774c7dca9b44c50307df73d8f850fcf24dc1c5da29b09266316ff19bfa52a7537b39ea799e22066b4fc8664915e1f04c2c51e88301daa122af165c183bf0135d"
-    "sha256=a358817178379a1277951e845adc01bdcc2df6382f85bee6bc16e8a0d4e8348b"
+    "md5=b593874d70983135344cd0a3f3119c6f"
+    "sha512=d627f94c8ad8d378981d6daa07c77cde1a036f1244a6ecd2b75dfc51dab457ae8057adee98bef0ca0d947fc379d3054cf31eab8199f0f0a8edbdc87d11d9de25"
+    "sha256=a0564a5f3061bcd16cb223b488330382fc506ed46fb398c274afb74f59d6f77f"
   ]
 }
