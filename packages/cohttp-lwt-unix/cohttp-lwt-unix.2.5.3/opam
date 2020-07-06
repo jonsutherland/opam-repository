@@ -45,9 +45,9 @@ build: [
 dev-repo: "git+https://github.com/mirage/ocaml-cohttp.git"
 url {
   src:
-    "https://github.com/mirage/ocaml-cohttp/releases/download/v2.5.1/cohttp-v2.5.1.tbz"
+    "https://github.com/mirage/ocaml-cohttp/releases/download/v2.5.3/cohttp-v2.5.3.tbz"
   checksum: [
-    "sha256=268de1479bf010c16f1de1ab5f9c75595dfdcafb2017ed4e73f8773b620da946"
-    "sha512=051aa57ad631ba766f22f6ebc0746545fc74ca1180206c695deb1ca73800f7ea436c88f95a0bb1d78a8dc1da0685a19553cdacd04667893022215bedbc2b880a"
+    "sha256=21927f60eeb52ef8e8943ce770ce1c59685f99e8a20229295654c5c308402324"
+    "sha512=bf1152724b1bbd67ea71922dfbfd25299dea05292199e17b50187995a35a8c6e480da43cfb409ca2c541350495e154fa92917db8d7941c18ce36cd9e227adc54"
   ]
 }
