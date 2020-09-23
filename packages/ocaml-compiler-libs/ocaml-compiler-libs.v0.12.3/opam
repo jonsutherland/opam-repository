@@ -4,7 +4,7 @@ authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
 homepage: "https://github.com/janestreet/ocaml-compiler-libs"
 bug-reports: "https://github.com/janestreet/ocaml-compiler-libs/issues"
 dev-repo: "git+https://github.com/janestreet/ocaml-compiler-libs.git"
-license: "Apache-2.0"
+license: "MIT"
 build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
@@ -12,16 +12,18 @@ depends: [
   "ocaml" {>= "4.04.1"}
   "dune" {>= "1.5.1"}
 ]
-synopsis: "OCaml compiler libraries repackaged"
+synopsis: """OCaml compiler libraries repackaged"""
 description: """
+
 This packages exposes the OCaml compiler libraries repackages under
-the toplevel names Ocaml_common, Ocaml_bytecomp, Ocaml_optcomp, ..."""
+the toplevel names Ocaml_common, Ocaml_bytecomp, Ocaml_optcomp, ...
+"""
+x-commit-hash: "7f5d1d2931b96fb3ee6dd569a469b51f621a6dd4"
 url {
   src:
-    "https://github.com/janestreet/ocaml-compiler-libs/archive/v0.12.1.tar.gz"
+    "https://github.com/janestreet/ocaml-compiler-libs/releases/download/v0.12.3/ocaml-compiler-libs-v0.12.3.tbz"
   checksum: [
-    "md5=2f929af7c764a3f681a5671f271210c4"
-    "sha256=d20f217992f26fa2012c67537391d55e1619e37c51087d1d65b583f08c849a04"
-    "sha512=f4358ab6a1be8405b077d690ca636cc0af9507fdc7836609e0ddc1f841488f24cb9741869f1ea95ca3dff82f25f60dcf907f4f7c049bdf282c1936f3fefd6808"
+    "sha256=a8403531439c14bbda2d504ef93610fd29a8e9520fc700f21889d893a513e3c9"
+    "sha512=0bb03b38e93bab3274a8ade38d017808110bc02f2181a594d8775c68fdd465733393f0451dbbf8860e6b50b56c45671d2182637c0840d1d6574803ec18673972"
   ]
 }
