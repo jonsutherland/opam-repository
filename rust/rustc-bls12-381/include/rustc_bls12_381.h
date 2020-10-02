@@ -105,6 +105,9 @@ extern bool rustc_bls12_381_g1_eq(const unsigned char *g1,
 
 extern bool rustc_bls12_381_g1_is_zero(const unsigned char *g);
 
+extern void rustc_bls12_381_g1_double(unsigned char *buffer,
+                                      const unsigned char *g);
+
 extern void rustc_bls12_381_g1_mul(unsigned char *buffer,
                                    const unsigned char *g,
                                    const unsigned char *a);
@@ -135,6 +138,9 @@ extern void rustc_bls12_381_g1_compressed_zero(unsigned char *buffer);
 
 extern void rustc_bls12_381_g1_compressed_random(unsigned char *element);
 
+extern void rustc_bls12_381_g1_compressed_double(unsigned char *buffer,
+                                                 const unsigned char *g);
+
 extern void rustc_bls12_381_g1_compressed_mul(unsigned char *buffer,
                                               const unsigned char *g,
                                               const unsigned char *a);
@@ -163,6 +169,9 @@ extern bool rustc_bls12_381_g2_eq(const unsigned char *g1,
                                   const unsigned char *g2);
 
 extern bool rustc_bls12_381_g2_is_zero(const unsigned char *g);
+
+extern void rustc_bls12_381_g2_double(unsigned char *buffer,
+                                      const unsigned char *g);
 
 extern void rustc_bls12_381_g2_mul(unsigned char *buffer,
                                   const unsigned char *g,
@@ -194,6 +203,9 @@ extern bool rustc_bls12_381_g2_compressed_eq(const unsigned char *g1,
                                              const unsigned char *g2);
 
 extern bool rustc_bls12_381_g2_compressed_is_zero(const unsigned char *g);
+
+extern void rustc_bls12_381_g2_compressed_double(unsigned char *buffer,
+                                                 const unsigned char *g);
 
 extern void rustc_bls12_381_g2_compressed_mul(unsigned char *buffer,
                                               const unsigned char *g,

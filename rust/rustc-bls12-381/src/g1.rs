@@ -168,6 +168,19 @@ pub extern "C" fn rustc_bls12_381_g1_is_zero(
     g.is_zero()
 }
 
+#[no_mangle]
+pub extern "C" fn rustc_bls12_381_g1_double(
+    buffer: *mut [c_uchar; LENGTH_UNCOMPRESSED_G1_BYTES],
+    g: *const [c_uchar; LENGTH_UNCOMPRESSED_G1_BYTES],
+) {
+    let g = read_uncompressed_g1(unsafe { &*g });
+    // FIXME: A bit costy to go back in repr.
+    let mut g = g.into_affine_unchecked().unwrap().into_projective();
+    g.double();
+    let result = bls12_381::G1Uncompressed::from_affine(g.into_affine());
+    write_uncompressed_g1(buffer, result);
+}
+
 // Multiply a point by a scalar (an Fr element)
 // !! The point must be valid. Undefined behaviors otherwise.
 #[no_mangle]
@@ -266,6 +279,19 @@ pub extern "C" fn rustc_bls12_381_g1_compressed_random(
     let random_g1 = bls12_381::G1::random(&mut OsRng);
     let compressed_form = bls12_381::G1Compressed::from_affine(random_g1.into_affine());
     write_compressed_g1(buffer, compressed_form);
+}
+
+#[no_mangle]
+pub extern "C" fn rustc_bls12_381_g1_compressed_double(
+    buffer: *mut [c_uchar; LENGTH_COMPRESSED_G1_BYTES],
+    g: *const [c_uchar; LENGTH_COMPRESSED_G1_BYTES],
+) {
+    let g = read_compressed_g1(unsafe { &*g });
+    // FIXME: A bit costy to go back in repr.
+    let mut g = g.into_affine_unchecked().unwrap().into_projective();
+    g.double();
+    let result = bls12_381::G1Compressed::from_affine(g.into_affine());
+    write_compressed_g1(buffer, result);
 }
 
 #[no_mangle]

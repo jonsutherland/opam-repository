@@ -133,6 +133,19 @@ pub extern "C" fn rustc_bls12_381_g2_is_zero(
 }
 
 #[no_mangle]
+pub extern "C" fn rustc_bls12_381_g2_double(
+    buffer: *mut [c_uchar; LENGTH_UNCOMPRESSED_G2_BYTES],
+    g: *const [c_uchar; LENGTH_UNCOMPRESSED_G2_BYTES],
+) {
+    let g = read_uncompressed_g2(unsafe { &*g });
+    // FIXME: A bit costy to go back in repr.
+    let mut g = g.into_affine_unchecked().unwrap().into_projective();
+    g.double();
+    let result = bls12_381::G2Uncompressed::from_affine(g.into_affine());
+    write_uncompressed_g2(buffer, result);
+}
+
+#[no_mangle]
 pub extern "C" fn rustc_bls12_381_g2_mul(
     buffer: *mut [c_uchar; LENGTH_UNCOMPRESSED_G2_BYTES],
     g: *const [c_uchar; LENGTH_UNCOMPRESSED_G2_BYTES],
@@ -228,6 +241,18 @@ pub extern "C" fn rustc_bls12_381_g2_compressed_is_zero(
     let g = unsafe { &*g };
     let g = read_compressed_g2(&g).into_affine_unchecked().unwrap();
     g.is_zero()
+}
+
+#[no_mangle]
+pub extern "C" fn rustc_bls12_381_g2_compressed_double(
+    buffer: *mut [c_uchar; LENGTH_COMPRESSED_G2_BYTES],
+    g: *const [c_uchar; LENGTH_COMPRESSED_G2_BYTES],
+) {
+    let g = read_compressed_g2(unsafe { &*g });
+    let mut g = g.into_affine_unchecked().unwrap().into_projective();
+    g.double();
+    let result = bls12_381::G2Compressed::from_affine(g.into_affine());
+    write_compressed_g2(buffer, result);
 }
 
 #[no_mangle]
