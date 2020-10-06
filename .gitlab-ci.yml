@@ -16,9 +16,10 @@ stages:
     - docker push "${CI_REGISTRY_IMAGE}:opam--${CI_COMMIT_SHA}"
     - docker push "${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHA}"
     - if [ -n "${CI_COMMIT_REF_NAME}" ]; then
+        TAG_NAME=$(echo "${CI_COMMIT_REF_NAME}" | tr -c -- '-._\n[:alnum:]' '_') ;
         docker tag "${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHA}"
-                   "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}" ;
-        docker push "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}" ;
+                   "${CI_REGISTRY_IMAGE}:${TAG_NAME}" ;
+        docker push "${CI_REGISTRY_IMAGE}:${TAG_NAME}" ;
       fi
 
 build-safe:
