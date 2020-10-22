@@ -18,6 +18,5 @@ echo
 docker build \
        -f minimal.Dockerfile \
        --build-arg BUILD_IMAGE="alpine:${alpine_version}" \
-       --build-arg IMAGE_VERSION=${image_version} \
        -t "$image_name:$image_version" \
        $repo_dir
