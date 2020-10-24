@@ -59,3 +59,6 @@ url {
     "sha512=1e197009f7e6b29b43944f757e987934337ebfa11bb2ff2ca8ba3ebc607e37cf1259d07a90d7faf4b91b49ee20d5c65357ad305f34ada0a8d336a3904233150e"
   ]
 }
+conflicts: [
+  "mirage-xen" {>= "6.0.0"}
+]

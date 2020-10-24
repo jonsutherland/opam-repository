@@ -16,6 +16,7 @@ depends: [
   "ctypes"
   "ctypes-foreign"
 ]
+available: os-family != "bsd"
 build: [
   ["sh" "-exc" "cd raw && ./configure"]
   [make "-C" "raw"]
@@ -24,10 +25,10 @@ install: [make "-C" "raw" "install-hacl-star-raw"]
 dev-repo: "git+https://github.com/project-everest/hacl-star.git"
 url {
   src:
-    "https://github.com/project-everest/hacl-star/releases/download/ocaml-v0.2.2/hacl-star.0.2.2.tar.gz"
+    "https://github.com/project-everest/hacl-star/releases/download/ocaml-v0.3.0/hacl-star.0.3.0.tar.gz"
   checksum: [
-    "md5=bf3bb86bf6dc622182795f03aad9247c"
-    "sha512=b5bba6c7c2d1e995a2795d339829ed7bcf77e03a0b8737c6e9d29e4638dd756db1eb13ad8a39b38246bfba5171125cdd1b6c0d36c0ec66c347acd7b85f381190"
-    "sha256=34cbb85364a2a01b7630275944f1174aa42be4645730d1364a345933d6706acc"
+    "md5=d96f706ad7cc24b0b4bd048a8acf872e"
+    "sha512=909b2cc9cfd7d37959768d441fe248eaf09c82072d82a25927fa3a5fb1582602d1196604d8fcc663531b7cd5fc1554129f1dc069b8ba147c5c4c4d8139573485"
+    "sha256=78ad341d4091c7a0174e37958e9ac89c5d7e8043cc134b82992aafdb52e75a7b"
   ]
 }
