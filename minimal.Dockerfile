@@ -14,7 +14,7 @@ LABEL org.label-schema.vendor="Nomadic Labs" \
       distro_long="alpine-$alpine_version" \
       operatingsystem="linux"
 
-RUN apk --no-cache add libev gmp sudo hidapi libffi libgcc
+RUN apk --no-cache add libev gmp sudo hidapi libffi gcc libc-dev
 
 RUN adduser -S tezos && \
     echo 'tezos ALL=(ALL:ALL) NOPASSWD:ALL' > /etc/sudoers.d/tezos && \
