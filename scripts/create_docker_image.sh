@@ -12,14 +12,22 @@ image_version="${2:-latest}"
 ## may pull cache...
 docker pull "registry.gitlab.com/tezos/opam-repository:master" || true > /dev/null 2>&1
 
-"$script_dir"/create_docker_image.minimal.sh \
-             "$image_name" "minimal--$image_version"
+"$script_dir"/create_docker_image.runtime-dependencies.sh \
+             "$image_name" \
+             "runtime-dependencies--$image_version"
 
-"$script_dir"/create_docker_image.opam.sh \
-             "$image_name" "opam--$image_version" \
-             "$image_name:minimal--$image_version"
+"$script_dir"/create_docker_image.runtime-prebuild-dependencies.sh \
+             "$image_name" \
+             "runtime-prebuild-dependencies--$image_version" \
+             "$image_name:runtime-dependencies--$image_version"
 
-"$script_dir"/create_docker_image.build_deps.sh \
-             "$image_name" "$image_version" \
-             "$image_name:opam--$image_version"
+"$script_dir"/create_docker_image.runtime-build-dependencies.sh \
+             "$image_name" \
+             "runtime-build-dependencies--$image_version" \
+             "$image_name:runtime-prebuild-dependencies--$image_version"
+
+"$script_dir"/create_docker_image.runtime-build-test-dependencies.sh \
+             "$image_name" \
+             "runtime-build-test-dependencies--$image_version" \
+             "$image_name:runtime-build-dependencies--$image_version"
 

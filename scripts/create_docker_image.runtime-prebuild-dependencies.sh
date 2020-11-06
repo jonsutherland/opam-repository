@@ -8,19 +8,20 @@ cd "$repo_dir"
 
 . "$script_dir"/version.sh
 
-image_name="${1:-tezos_build_deps}"
+image_name="${1:-tezos_runtime-prebuild-dependencies}"
 image_version="${2:-latest}"
-minimal_image="${3:-$image_name/minimal:$image_version}"
+runtime_dependencies_image="${3}"
 
 echo
-echo "### Building minimal opam image..."
+echo "### Building runtime-prebuild-dependencies image"
+echo "### (includes: non-opam deps, cache of not-installed opam deps)"
 echo
 
 docker build \
-       -f opam.Dockerfile \
-       --build-arg BUILD_IMAGE=${minimal_image} \
+       -f runtime-prebuild-dependencies.Dockerfile \
+       --build-arg BUILD_IMAGE="${runtime_dependencies_image}" \
        --build-arg OCAML_VERSION=${ocaml_version} \
        --build-arg RUST_VERSION=${rust_version} \
-       --build-arg PYTHON_VERSION=${python_version} \
        -t "$image_name:$image_version" \
        $repo_dir
+

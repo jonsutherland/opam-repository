@@ -8,15 +8,17 @@ cd "$repo_dir"
 
 . "$script_dir"/version.sh
 
-image_name="${1:-tezos_build_deps/minimal}"
+image_name="${1}"
 image_version="${2:-latest}"
 
 echo
-echo "### Building minimal alpine image..."
+echo "### Building runtime-dependencies image"
+echo "### (includes: alpine, runtime-linked libraries)"
 echo
 
 docker build \
-       -f minimal.Dockerfile \
+       -f runtime-dependencies.Dockerfile \
        --build-arg BUILD_IMAGE="alpine:${alpine_version}" \
+       --build-arg IMAGE_VERSION="${image_version}" \
        -t "$image_name:$image_version" \
        $repo_dir

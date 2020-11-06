@@ -1,3 +1,13 @@
+# runtime dependencies
+#
+# This image includes
+# - runtime dependencies (libraries linked at load time of the process)
+#
+# This image is intended for
+# - distributing the tezos binaries in
+# - building the runtime-prebuild-dependencies, runtime-build-dependencies, and runtime-build-test-dependencies images
+
+
 ARG BUILD_IMAGE
 
 FROM ${BUILD_IMAGE}
@@ -14,7 +24,9 @@ LABEL org.label-schema.vendor="Nomadic Labs" \
       distro_long="alpine-$alpine_version" \
       operatingsystem="linux"
 
+USER root
 RUN apk --no-cache add libev gmp sudo hidapi libffi gcc libc-dev
+COPY zcash-params /usr/share/zcash-params
 
 RUN adduser -S tezos && \
     echo 'tezos ALL=(ALL:ALL) NOPASSWD:ALL' > /etc/sudoers.d/tezos && \
@@ -23,8 +35,6 @@ RUN adduser -S tezos && \
     sed -i.bak 's/^Defaults.*requiretty//g' /etc/sudoers && \
     mkdir -p /var/run/tezos/node /var/run/tezos/client && \
     sudo chown -R tezos /var/run/tezos
-
-COPY zcash-params /usr/share/zcash-params
 
 USER tezos
 ENV USER=tezos

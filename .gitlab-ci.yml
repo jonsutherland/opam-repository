@@ -14,12 +14,15 @@ stages:
     - . ./scripts/version.sh
     - docker login -u "${CI_REGISTRY_USER}" -p "${CI_REGISTRY_PASSWORD}" "${CI_REGISTRY}"
     - ./scripts/create_docker_image.sh "${CI_REGISTRY_IMAGE}" "${IMAGE_ARCH_PREFIX}${CI_COMMIT_SHA}"
-    - docker push "${CI_REGISTRY_IMAGE}:minimal--${IMAGE_ARCH_PREFIX}${CI_COMMIT_SHA}"
-    - docker push "${CI_REGISTRY_IMAGE}:opam--${IMAGE_ARCH_PREFIX}${CI_COMMIT_SHA}"
-    - docker push "${CI_REGISTRY_IMAGE}:${IMAGE_ARCH_PREFIX}${CI_COMMIT_SHA}"
+    # push
+    - docker push "${CI_REGISTRY_IMAGE}:runtime-dependencies--${IMAGE_ARCH_PREFIX}${CI_COMMIT_SHA}"
+    - docker push "${CI_REGISTRY_IMAGE}:runtime-prebuild-dependencies--${IMAGE_ARCH_PREFIX}${CI_COMMIT_SHA}"
+    - docker push "${CI_REGISTRY_IMAGE}:runtime-build-dependencies--${IMAGE_ARCH_PREFIX}${CI_COMMIT_SHA}"
+    - docker push "${CI_REGISTRY_IMAGE}:runtime-build-test-dependencies--${IMAGE_ARCH_PREFIX}${CI_COMMIT_SHA}"
+    # special case for git tag
     - if [ -n "${CI_COMMIT_REF_NAME}" ]; then
         TAG_NAME=$(echo "${CI_COMMIT_REF_NAME}" | tr -c -- '-._\n[:alnum:]' '_') ;
-        docker tag "${CI_REGISTRY_IMAGE}:${IMAGE_ARCH_PREFIX}${CI_COMMIT_SHA}"
+        docker tag "${CI_REGISTRY_IMAGE}:runtime-build-dependencies--${IMAGE_ARCH_PREFIX}${CI_COMMIT_SHA}"
                    "${CI_REGISTRY_IMAGE}:${IMAGE_ARCH_PREFIX}${TAG_NAME}" ;
         docker push "${CI_REGISTRY_IMAGE}:${IMAGE_ARCH_PREFIX}${TAG_NAME}" ;
       fi

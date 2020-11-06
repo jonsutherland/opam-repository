@@ -1,22 +1,30 @@
+# runtime + prebuild dependencies
+#
+# This image includes
+# - runtime dependencies (libraries linked at load time of the process)
+# - non-opam build-dependencies (rust dependencies)
+# - cache for opam build-dependencies
+#
+# This image is intended for
+# - testing the buildability of tezos opam packages
+# - building the runtime-build-dependencies and runtime-build-test-dependencies image
+
+
 ARG BUILD_IMAGE
 
 FROM ${BUILD_IMAGE}
 
 ARG OCAML_VERSION
 ARG RUST_VERSION
-ARG PYTHON_VERSION
 
 USER root
 RUN apk --no-cache add \
         build-base bash perl xz m4 git curl tar rsync patch jq \
-        py3-pip python3 python3-dev coreutils \
-        py3-sphinx py3-sphinx_rtd_theme \
         ncurses-dev gmp-dev libev-dev opam \
         openssl-dev \
         hidapi-dev libffi-dev cargo
 
 # Check versions of other interpreters/compilers
-RUN test $(python3 --version | cut -d ' ' -f2) = ${PYTHON_VERSION}
 RUN test $(rustc --version | cut -d' ' -f2) = ${RUST_VERSION}
 
 ### Begin Rust dependencies compilation
@@ -62,30 +70,10 @@ RUN mkdir ~/.ssh && \
 COPY --chown=tezos:nogroup packages opam-repository/packages
 
 RUN cd opam-repository && \
-       opam admin cache && \
-       opam update && \
-       opam install opam-depext && \
-       opam clean
-
-### Begin Python setup
-# Install poetry (https://github.com/python-poetry/poetry)
-RUN pip3 install --user poetry==1.0.10
-
-# Required to have poetry in the path in the CI
-ENV PATH="/home/tezos/.local/bin:${PATH}"
-
-# Copy poetry files to install the dependencies in the docker image
-COPY poetry.lock poetry.lock
-COPY pyproject.toml pyproject.toml
-
-# Poetry will create the virtual environment in $(pwd)/.venv.
-# The containers running this image can load the virtualenv with
-# $(pwd)/.venv/bin/activate and do not require to run `poetry install`
-# It speeds up the Tezos CI and simplifies the .gitlab-ci.yml file
-# by avoiding duplicated poetry setup checks.
-RUN poetry config virtualenvs.in-project true
-RUN poetry install
-### End Python setup
+    opam admin cache && \
+    opam update && \
+    opam install opam-depext && \
+    opam clean
 
 ENTRYPOINT [ "opam", "exec", "--" ]
 CMD [ "/bin/sh" ]
