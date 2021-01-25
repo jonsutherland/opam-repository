@@ -2,7 +2,6 @@
 
 This repository contains different artefacts used in [Tezos](https://gitlab.com/tezos/tezos)
 
-- *rust* contains the Rust dependencies, grouped in a Cargo workspace.
 - *packages* contains specific OPAM packages.
 - *zcash-params* contains the Sapling parameters.
 - *scripts* contains miscellaneous scripts.
