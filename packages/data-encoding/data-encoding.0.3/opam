@@ -6,14 +6,14 @@ bug-reports: "https://gitlab.com/nomadic-labs/data-encoding/issues"
 dev-repo: "git+https://gitlab.com/nomadic-labs/data-encoding.git"
 license: "MIT"
 depends: [
-  "ocaml" { >= "4.07" }
-  "dune" { >= "1.7" }
+  "ocaml" { >= "4.08" }
+  "dune" { >= "1.11" }
   "ezjsonm"
   "zarith"
-  "json-data-encoding" { = "0.8" }
-  "json-data-encoding-bson" { = "0.8" }
+  "json-data-encoding" { = "0.9.1" }
+  "json-data-encoding-bson" { = "0.9.1" }
   "alcotest" { with-test }
-  "crowbar" { with-test }
+  "crowbar" { >= "0.2" & with-test }
 ]
 build: [
   ["dune" "build" "-p" name "-j" jobs]
@@ -22,10 +22,10 @@ build: [
 synopsis: "Library of JSON and binary encoding combinators"
 url {
   src:
-    "https://gitlab.com/nomadic-labs/data-encoding/-/archive/0.2/data-encoding-0.2.tar.gz"
+    "https://gitlab.com/nomadic-labs/data-encoding/-/archive/0.3/data-encoding-0.3.tar.gz"
   checksum: [
-    "md5=c3573f2f066f61437feb6d33d476ee09"
-    "sha512=d9b95c0b4655930d590a78288edad50fbb845dfff1d2378c11e7f7b2499a70380af2edf289f24145f58c92091195f8326bf51efdb980cd221c22357f9919c37c"
-    "sha256=9f7b5e891eae36e7ccc4824e9487533155f69011e65e034d3d03dd6c7acb67b1"
+    "md5=355a9dde032dcef362e49a086285a251"
+    "sha512=f557b691563b8881d1bcbc55c030754a927a394ed6fab5ae8d312b98517d7ecccf7fc35bce8a224a934707943f24132a17dd0a596d9eb7d5ca533df34a5c761f"
+    "sha256=871d138ceaa58c98a1a22524498660eb02973f2aa74114d0b0a201e57d2cb1a0"
   ]
 }
