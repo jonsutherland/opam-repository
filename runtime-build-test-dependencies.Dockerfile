@@ -33,6 +33,8 @@ USER tezos
 WORKDIR /home/tezos
 
 ### Begin Python setup
+# Deactivate rust-crypto build until we update rust
+ENV CRYPTOGRAPHY_DONT_BUILD_RUST=1
 # Install poetry (https://github.com/python-poetry/poetry)
 RUN pip3 install --user poetry==1.0.10
 
