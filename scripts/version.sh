@@ -2,7 +2,7 @@
 
 alpine_version=3.12
 
-ocaml_version=4.09.1
+ocaml_version=4.10.2
 
 rust_version=1.44.0
 
