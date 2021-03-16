@@ -14,7 +14,8 @@ install: [
   [make "-C" "proofs" "install"] {coq:installed}
 ]
 depends: [
-  "dune" {>= "2.0" & < "2.8"}
+  "csexp"
+  "dune" {>= "2.8"}
   "ocaml" {>= "4.10" & < "4.11"}
   "ocamlfind" {>= "1.5.2"}
   "smart-print"
@@ -34,9 +35,9 @@ tags: [
 synopsis: "Compile a subset of OCaml to Coq"
 
 url {
-  src: "https://github.com/clarus/coq-of-ocaml/archive/2.4.0.tar.gz"
+  src: "https://github.com/clarus/coq-of-ocaml/archive/2.4.1.tar.gz"
   checksum: [
-    "sha256=c7996fa56404815f4b87395c910a1cfb4a60ad05fd03ea26604e5ef1f4d345bc"
-    "sha512=a92cb1c0c505dcfd58084e4000d90e9816ea3abfd9f9778662306fb7818af3bbfca757822acda4e4ba907b24c81ab703db3b324373c13fa9209f491a3ef4ca8d"
+    "sha256=5856656d5542475e7eaf9e82a8348d85754f5c1ef1c56240ca97234793fb68ff"
+    "sha512=44530bce7d40c8a27459db17c504b2a14d9c37fdbb0658df70bcf376df4309bd88222b89a069d8534c09eb40f1394dabda2bade9e44a9fde5a49b01fc9325d35"
   ]
 }
