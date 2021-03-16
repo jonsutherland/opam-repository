@@ -18,18 +18,18 @@ install: [
   [make "install" "XEN=%{mirage-xen:enable}%"]
 ]
 depends: [
-   "ocaml" {>= "4.02.3"}
-   "integers" { >= "0.3.0" }
-   "ocamlfind" {build}
-   "conf-pkg-config" {build}
-   "lwt" {with-test & >= "3.2.0"}
-   "ctypes-foreign" {with-test}
-   "ounit" {with-test}
-   "conf-ncurses" {with-test}
+  "ocaml" {>= "4.02.3"}
+  "integers" { >= "0.3.0" }
+  "ocamlfind" {build}
+  "lwt" {with-test & >= "3.2.0"}
+  "ctypes-foreign" {with-test}
+  "ounit" {with-test}
+  "conf-ncurses" {with-test}
+  "bigarray-compat"
 ]
 depopts: [
-   "ctypes-foreign"
-   "mirage-xen"
+  "ctypes-foreign"
+  "mirage-xen"
 ]
 tags: ["org:ocamllabs" "org:mirage"]
 synopsis: "Combinators for binding to C libraries without writing any C"
@@ -52,11 +52,11 @@ the `ctypes-foreign` optional dependency:
 This will make the `ctypes.foreign` ocamlfind subpackage available."""
 authors: "yallop@gmail.com"
 url {
-  src: "https://github.com/ocamllabs/ocaml-ctypes/archive/0.17.1.tar.gz"
+  src: "https://github.com/ocamllabs/ocaml-ctypes/archive/0.18.0.tar.gz"
   checksum: [
-    "md5=508ea062105518c14fd516aa2ea9db5e"
-    "sha256=41673c2eb93ca99ed3de183bef3e6b436c67a0d902b110be5da158aad922a7e9"
-    "sha512=1e197009f7e6b29b43944f757e987934337ebfa11bb2ff2ca8ba3ebc607e37cf1259d07a90d7faf4b91b49ee20d5c65357ad305f34ada0a8d336a3904233150e"
+    "md5=5d9ef3790fda7cd97a8cec08be4b5b61"
+    "sha256=1f30c48f4667f17ea4ab5048b9fd10d090a7fbbf4f1997eb018b656b851340a4"
+    "sha512=400994d7b3346ca40d6aaea46617f82c07f2ab2bb0b9934c9c63b6b5c0e651e088b8b987e6c297e893e3d0ba69d81e0dbc5e0cab67349ecd27e689b2a2f014c7"
   ]
 }
 conflicts: [
