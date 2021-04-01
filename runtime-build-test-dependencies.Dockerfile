@@ -24,13 +24,13 @@ RUN apk --no-cache add \
         py3-pip python3 python3-dev coreutils \
         py3-sphinx py3-sphinx_rtd_theme
 
-### Begin Javascript env setup
+USER tezos
+WORKDIR /home/tezos
+
+### Begin Javascript env setup as tezos user
 COPY nodejs nodejs
 RUN bash nodejs/install-nvm.sh
 ### End Javascript env setup
-
-USER tezos
-WORKDIR /home/tezos
 
 ### Begin Python setup
 # Deactivate rust-crypto build until we update rust
