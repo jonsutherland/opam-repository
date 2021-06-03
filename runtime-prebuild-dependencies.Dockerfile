@@ -36,6 +36,7 @@ COPY --chown=tezos:nogroup \
       packages/ocaml \
       packages/ocaml-config \
       packages/ocaml-base-compiler \
+      packages/ocaml-options-vanilla \
       packages/base-bigarray \
       packages/base-bytes \
       packages/base-unix \

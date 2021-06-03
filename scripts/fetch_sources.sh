@@ -2,7 +2,7 @@
 
 set -e
 
-readonly DEFAULT_EXCLUDED_PACKAGES=ocaml-variants
+readonly DEFAULT_EXCLUDED_PACKAGES=ocaml-option-
 
 usage () {
     cat >&2 <<EOF
