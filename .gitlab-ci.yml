@@ -1,4 +1,5 @@
 stages:
+  - lint
   - build
   - publish
 
@@ -26,6 +27,15 @@ stages:
                    "${CI_REGISTRY_IMAGE}:${IMAGE_ARCH_PREFIX}${TAG_NAME}" ;
         docker push "${CI_REGISTRY_IMAGE}:${IMAGE_ARCH_PREFIX}${TAG_NAME}" ;
       fi
+
+docker-hadolint:
+  image: hadolint/hadolint:latest-debian
+  stage: lint
+  script:
+    - hadolint runtime-dependencies.Dockerfile
+    - hadolint runtime-prebuild-dependencies.Dockerfile
+    - hadolint runtime-build-dependencies.Dockerfile
+    - hadolint runtime-build-test-dependencies.Dockerfile
 
 build-safe:
   <<: *build-definition
