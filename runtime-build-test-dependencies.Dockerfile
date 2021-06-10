@@ -22,8 +22,9 @@ ARG PYTHON_VERSION
 USER root
 RUN apk --no-cache add \
         py3-pip python3 python3-dev coreutils \
-        py3-sphinx py3-sphinx_rtd_theme \
-        shellcheck
+        py3-sphinx py3-sphinx_rtd_theme
+
+RUN if [[ "$(arch)" == "x86_64" ]]; then apk --no-cache add shellcheck; fi
 
 USER tezos
 WORKDIR /home/tezos
