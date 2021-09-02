@@ -1,6 +1,5 @@
 opam-version: "2.0"
 synopsis: "Virtual package for BLS12-381 primitives"
-description: "Virtual package for BLS12-381 primitives"
 maintainer: "Danny Willems <be.danny.willems@gmail.com>"
 authors: "Danny Willems <be.danny.willems@gmail.com>"
 license: "MIT"
@@ -11,16 +10,15 @@ depends: [
   "dune" {>= "2.8.4"}
   "ff-sig" {>= "0.6.1" & < "0.7.0"}
   "zarith" {>= "1.10" & < "2.0"}
-  "bls12-381-gen" {= version}
 ]
 build: ["dune" "build" "-j" jobs "-p" name "@install"]
 dev-repo: "git+https://gitlab.com/dannywillems/ocaml-bls12-381.git"
 url {
   src:
-    "https://gitlab.com/dannywillems/ocaml-bls12-381/-/archive/0.4.3/ocaml-bls12-381-0.4.3.tar.bz2"
+    "https://gitlab.com/dannywillems/ocaml-bls12-381/-/archive/1.0.0/ocaml-bls12-381-1.0.0.tar.bz2"
   checksum: [
-    "md5=f81a4562579a69cc0312d6c948678d35"
-    "sha512=b9997e85babe1e160bd5ed1d1986584f375a544e120258a18b1f27bf01b86c9a243181e09120ed69fbd611d5ca4721c89a9e3a18e1cf89f7419a430d5b9b2aef"
-    "sha256=04ae1f26f6ea772f721b223e6c966e0e7c0cbc69fa58bb2c2aed9194e0998616"
+    "md5=64b1732d64a546b3ab7c557c11c88637"
+    "sha512=4526cf4824ee39486b393461bbbdf6f4c3f2c0c2d75c111c3e4fe862ef63f5fd75d34ce042870f83d3a7183e899ec4a3671c1576a9317f39d9787781beeab5e1"
+    "sha256=1a1f066925b43749785e3c24d9ee45431963fa9a63a8e7d216821c835bf91361"
   ]
 }
