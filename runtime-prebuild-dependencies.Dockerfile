@@ -21,6 +21,12 @@ ARG RUST_VERSION
 # see https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#run
 SHELL ["/bin/ash", "-o", "pipefail", "-c"]
 
+# Adds static packages of hidapi and libusb built by `scripts/libusb-hidapi.sh`
+# in `runtime-prebuild-dependencies` image.
+WORKDIR /
+COPY _docker_build/keys /etc/apk/keys/
+COPY _docker_build/*/*.apk ./
+
 USER root
 # FIXME: ? it is true that without version, the image is not reproducible.
 # hadolint ignore=DL3018
@@ -28,7 +34,11 @@ RUN apk --no-cache add \
         build-base bash perl xz m4 git curl tar rsync patch jq \
         ncurses-dev gmp-dev libev-dev opam \
         openssl-dev \
-        hidapi-dev libffi-dev zlib-dev cargo
+        libffi-dev zlib-dev cargo \
+        hidapi-0.9.0-r2.apk \
+        hidapi-dev-0.9.0-r2.apk \
+        libusb-1.0.24-r2.apk \
+        libusb-dev-1.0.24-r2.apk
 
 # Check versions of other interpreters/compilers
 RUN test "$(rustc --version | cut -d' ' -f2)" = ${RUST_VERSION}

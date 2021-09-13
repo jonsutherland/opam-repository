@@ -20,6 +20,9 @@ FROM ${BUILD_IMAGE}
 # see https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#run
 SHELL ["/bin/ash", "-o", "pipefail", "-c"]
 
+USER tezos
+WORKDIR /home/tezos
+
 # hadolint ignore=SC2046
 RUN opam depext --update --yes $(opam list --all --short | grep -v ocaml-option-) && \
     opam install --yes $(opam list --all --short | grep -v ocaml-option-)
