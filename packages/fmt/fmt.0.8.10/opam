@@ -20,7 +20,11 @@ build: [["ocaml" "pkg/pkg.ml" "build" "--dev-pkg" "%{dev}%"
           "--with-cmdliner" "%{cmdliner:installed}%"]]
 url {
   src: "https://erratique.ch/software/fmt/releases/fmt-0.8.10.tbz"
-  checksum: "sha512=ee35fd2d89b1efb7a59b191b07fb160dcccf0fc1d7fdee6a67508a06c39c5048ba18a210cef4b7f6e80d05e808e70fc40b6fff54ab38db3a982eb2af79e34cb7"}
+  checksum: [
+    "sha512=ee35fd2d89b1efb7a59b191b07fb160dcccf0fc1d7fdee6a67508a06c39c5048ba18a210cef4b7f6e80d05e808e70fc40b6fff54ab38db3a982eb2af79e34cb7"
+    "sha256=52ca318fec49fccf806a175e7f7c74ed9a7c98879d1984ff3f4350d7d7a7b2bf"
+  ]
+}
 description: """
 Fmt exposes combinators to devise `Format` pretty-printing functions.
 

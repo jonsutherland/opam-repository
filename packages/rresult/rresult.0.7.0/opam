@@ -15,7 +15,11 @@ depends: ["ocaml" {>= "4.08.0"}
 build: [["ocaml" "pkg/pkg.ml" "build" "--dev-pkg" "%{dev}%"]]
 url {
   src: "https://erratique.ch/software/rresult/releases/rresult-0.7.0.tbz"
-  checksum: "sha512=f1bb631c986996388e9686d49d5ae4d8aaf14034f6865c62a88fb58c48ce19ad2eb785327d69ca27c032f835984e0bd2efd969b415438628a31f3e84ec4551d3"}
+  checksum: [
+    "sha512=f1bb631c986996388e9686d49d5ae4d8aaf14034f6865c62a88fb58c48ce19ad2eb785327d69ca27c032f835984e0bd2efd969b415438628a31f3e84ec4551d3"
+    "sha256=11aa7f5b83460e60431e3154e3e32c071d46e151ea5760cf24377805bf975540"
+  ]
+}
 description: """
 Rresult is an OCaml module for handling computation results and errors
 in an explicit and declarative manner, without resorting to

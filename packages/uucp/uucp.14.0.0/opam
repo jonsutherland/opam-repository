@@ -36,6 +36,10 @@ dependencies. It is distributed under the ISC license.
 Home page: http://erratique.ch/software/uucp"""
 url {
   src: "https://erratique.ch/software/uucp/releases/uucp-14.0.0.tbz"
-  checksum: "sha512=2d0224aed5d5accbb121624898f08598e8c74a2415942f159a54221c0cdac62ed64fc70a039c833e50110cefce77754ada9ac2d58f79a6fc9331135326fe6899"}
+  checksum: [
+    "sha512=2d0224aed5d5accbb121624898f08598e8c74a2415942f159a54221c0cdac62ed64fc70a039c833e50110cefce77754ada9ac2d58f79a6fc9331135326fe6899"
+    "sha256=f2d6607b91d9fe3160400ebae88d22c2518f6bfd0ee11f7f5af9a63660b4a9fb"
+  ]
+}
 post-messages: ["If the build fails with \"ocamlopt.opt got signal and exited\", issue 'ulimit -s unlimited' and retry."
                 {failure & (arch = "ppc64" | arch = "arm64")}]

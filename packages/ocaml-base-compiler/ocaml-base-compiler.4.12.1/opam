@@ -29,7 +29,10 @@ build: [
 install: [make "install"]
 url {
   src: "https://github.com/ocaml/ocaml/archive/4.12.1.tar.gz"
-  checksum: "sha256=f5a48a90557cb47ace7b1590fcab1362a1af38629a218350f69c225c57e96a41"
+  checksum: [
+    "sha256=f5a48a90557cb47ace7b1590fcab1362a1af38629a218350f69c225c57e96a41"
+    "sha512=e942e5cf5530804690ec45c40936ad2acbb60e11279fc676e0f04181fe1855f84ee5c3cb9c337fc5d01f6ee0e7b2251a6c04f7de56d99c20bb62026dff6c5671"
+  ]
 }
 extra-files: ["ocaml-base-compiler.install" "md5=3e969b841df1f51ca448e6e6295cb451"]
 post-messages: [
