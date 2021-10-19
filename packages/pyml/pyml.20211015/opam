@@ -32,9 +32,10 @@ depends: [
 ]
 depopts: ["utop"]
 url {
-  src: "https://github.com/thierry-martinez/pyml/archive/20210924.tar.gz"
+  src:
+    "https://github.com/thierry-martinez/pyml/archive/refs/tags/20211015.tar.gz"
   checksum: [
-    "sha512=c1e979751ef933635ae6d7f69e1638a3accfd082b0b3a364c4305eb268a67f73af26e321beef4cf3b99ab2fe35ab642c03b005ad620b0268e22b4a09b6f7c1c0"
-    "sha256=79078e44aab96b1200b28493b8a173dd6e1d5ed333c0de00b320839b005fca9e"
+    "sha512=79237ab56a2e439e785f4d873abd603fdaa51dbbb1258efb25102ca897826cf4d5d15e8467f324df85bba3c61995ceee8fb82d0808cda0da8010e024a78307aa"
+    "sha256=4ef930b3ff8c7c4115b87eabd194795fa1da3aedbebbdcddf82af84eadbb94ab"
   ]
 }

@@ -33,10 +33,10 @@ run-test: [
 dev-repo: "git+https://github.com/project-everest/hacl-star.git"
 url {
   src:
-    "https://github.com/project-everest/hacl-star/releases/download/ocaml-v0.4.1/hacl-star.0.4.1.tar.gz"
+    "https://github.com/project-everest/hacl-star/releases/download/ocaml-v0.4.2/hacl-star.0.4.2.tar.gz"
   checksum: [
-    "md5=bc59d5548ad7ac1d67403ad9f74bf608"
-    "sha256=a8769d99f7534610631d24898380060a30d98a58dcdf0a65b53bf1fd2339731a"
-    "sha512=2962724d9b0dbad0ce74bf8dd41a3efda9453a8cdec3e79c9d27f70d90d2252cbd57bf19128918628cdd4f011715b48abc211211ff3d65bf8f47c65c3fd6cc7c"
+    "md5=3943fe14935f8e9bad3a9d27fb24b19c"
+    "sha256=8211bde8a49c9bc63013be5059655fe820d2f03a54d9ff8cf1663754d985ba58"
+    "sha512=8a75a3e23da06c3edf9e43b7557bf1a816b65fb3b68bc7b458beab6d95a447f40f03dad9cf63fc2d46fae50d4f58b95680dc0b48dfd64612b64ea9d9157555a8"
   ]
 }
