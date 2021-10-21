@@ -33,7 +33,7 @@ USER root
 RUN apk --no-cache add \
         build-base bash perl xz m4 git curl tar rsync patch jq \
         ncurses-dev gmp-dev libev-dev opam \
-        openssl-dev \
+        openssl-dev autoconf \
         libffi-dev zlib-dev cargo \
         hidapi-0.9.0-r2.apk \
         hidapi-dev-0.9.0-r2.apk \
