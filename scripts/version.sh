@@ -1,9 +1,9 @@
 #! /bin/sh
 
-alpine_version=3.14
+export alpine_version=3.14
 
-ocaml_version=4.12.1
+export ocaml_version=4.12.1
 
-rust_version=1.52.1
+export rust_version=1.52.1
 
-python_version=3.9.5
+export python_version=3.9.5

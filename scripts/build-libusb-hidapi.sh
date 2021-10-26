@@ -17,7 +17,7 @@ cd "$repo_dir"
 # avoid shellcheck error
 alpine_version=
 
-#shellcheck disable=SC1090
+# shellcheck source=scripts/version.sh
 . "$script_dir/version.sh"
 
 # cleanup in case of error
