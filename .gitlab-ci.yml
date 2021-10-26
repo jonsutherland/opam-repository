@@ -42,6 +42,13 @@ docker-hadolint:
     - hadolint runtime-build-dependencies.Dockerfile
     - hadolint runtime-build-test-dependencies.Dockerfile
 
+# this step checks that all scripts pass shellcheck
+shellcheck:
+  image: koalaman/shellcheck-alpine:v0.7.1
+  stage: lint
+  script:
+    - shellcheck -x scripts/*.sh
+
 # this job builds the build docker images for amd64
 build-safe:
   <<: *build-definition
