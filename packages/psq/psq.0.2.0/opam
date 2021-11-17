@@ -1,0 +1,32 @@
+opam-version: "2.0"
+maintainer: "David Kaloper Meršinjak <dk505@cam.ac.uk>"
+authors: ["David Kaloper Meršinjak <dk505@cam.ac.uk>"]
+homepage: "https://github.com/pqwy/psq"
+doc: "https://pqwy.github.io/psq/doc"
+license: "ISC"
+dev-repo: "git+https://github.com/pqwy/psq.git"
+bug-reports: "https://github.com/pqwy/psq/issues"
+synopsis: "Functional Priority Search Queues"
+build: [ [ "dune" "subst" ] {dev}
+         [ "dune" "build" "-p" name "-j" jobs ]
+         [ "dune" "runtest" "-p" name ] {with-test & ocaml:version >= "4.07.0"} ]
+depends: [
+  "ocaml" {>="4.03.0"}
+  "dune" {>= "1.7"}
+  "seq"
+  "qcheck-core"     {with-test}
+  "qcheck-alcotest" {with-test}
+  "alcotest"        {with-test}
+]
+description: """
+Typical applications are searches, schedulers and caches. If you ever scratched
+your head because that A* didn't look quite right, a PSQ is what you needed.
+"""
+url {
+  src: "https://github.com/pqwy/psq/releases/download/v0.2.0/psq-v0.2.0.tbz"
+  checksum: [
+    "md5=b94fb15f8878172bf58446b7d0fb7c1e"
+    "sha256=d3cefdf6ab17e6025e7246765acbe86109156ab024bf9bd98353e713f0c494c8"
+    "sha512=0c570c5fc2bb2348b1ec03507abb4f152673a5d8f92c388c4cd5b7fc43a6e8f514007dbf4fb613503c4e8d5c8d3210b24ac37c546c79d94ebdf6b482e5cde024"
+  ]
+}
