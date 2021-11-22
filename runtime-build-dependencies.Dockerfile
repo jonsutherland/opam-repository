@@ -23,5 +23,11 @@ SHELL ["/bin/ash", "-o", "pipefail", "-c"]
 USER tezos
 WORKDIR /home/tezos
 
+# Build blst used by ocaml-bls12-381 without ADX to support old CPU
+# architectures.
+# See https://gitlab.com/tezos/tezos/-/issues/1788 and
+# https://gitlab.com/dannywillems/ocaml-bls12-381/-/merge_requests/135/
+ENV BLST_PORTABLE=yes
+
 # hadolint ignore=SC2046
 RUN opam install --yes $(opam list --all --short | grep -v ocaml-option-)
