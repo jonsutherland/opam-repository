@@ -1,6 +1,6 @@
 opam-version: "2.0"
 synopsis: "A pretty-printing combinator library and rendering engine"
-description: """
+description: """\
 This library offers a set of combinators for building so-called documents as
 well as an efficient engine for converting documents to a textual, fixed-width
 format. The engine takes care of indentation and line breaks, while respecting
@@ -10,6 +10,7 @@ authors: [
   "François Pottier <francois.pottier@inria.fr>"
   "Nicolas Pouillard <np@nicolaspouillard.fr>"
 ]
+license: "LGPL-2.0-only WITH OCaml-LGPL-linking-exception"
 homepage: "https://github.com/fpottier/pprint"
 bug-reports: "francois.pottier@inria.fr"
 depends: [
@@ -19,10 +20,10 @@ depends: [
 build: ["dune" "build" "-p" name "-j" jobs]
 dev-repo: "git+ssh://git@github.com/fpottier/pprint.git"
 url {
-  src: "https://github.com/fpottier/pprint/archive/20200410.tar.gz"
+  src: "https://github.com/fpottier/pprint/archive/20211129.tar.gz"
   checksum: [
-    "md5=d6b20d1db73cf15f79b2884a9e38bf06"
-    "sha512=f9a4ea908248cc14df1ef93418ce80598e88666b9347f683d5cc6f67a8c28290f0a4e40ae6f1842efa1d9c38d4802e7e3c77bbcf2e6f986c45ba12907e9580c9"
-    "sha256=f86fd38d52c65358b431ea0180ac4043db5174b6838737505bd02e253a18b57a"
+    "md5=defc647ff0d1cb2afc10d513230724c4"
+    "sha512=12133735f558075f1ecdcec16cc11f7237dd82883c542645c479f534acd8ed6935f05a3f9aad8e330c329520852bdff6d420d632636bd9004a4d0aade762cae6"
+    "sha256=5c3d4abed23d1185e2de1483cd9c2d994c0385d7389f6ef19bf33bcc771b1420"
   ]
 }
