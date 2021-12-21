@@ -29,7 +29,8 @@ USER root
 # hadolint ignore=DL3018
 RUN apk --no-cache add \
         py3-pip python3 python3-dev coreutils \
-        py3-sphinx py3-sphinx_rtd_theme && \
+        py3-sphinx py3-sphinx_rtd_theme \
+        libffi-dev && \
         if [ "$(arch)" = "x86_64" ]; then apk --no-cache add shellcheck; fi
 
 USER tezos
