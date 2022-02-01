@@ -18,13 +18,14 @@ depends: [
   "uri" {>= "1.9.0" }
   "crowbar" { with-test }
   "alcotest" { with-test }
+  "ocamlformat" { = "0.18.0" & dev }
 ]
 url {
   src:
-    "https://gitlab.com/nomadic-labs/json-data-encoding/-/archive/0.11/json-data-encoding-0.11.tar.gz"
+    "https://gitlab.com/nomadic-labs/json-data-encoding/-/archive/0.10/json-data-encoding-0.10.tar.gz"
   checksum: [
-    "md5=80dd53c56b44d5696d8542ac7013a768"
-    "sha512=63894b9fa49b450445bbe125f81e0336dd0e59e23e6875cab4344c727ef454ee126b4344815d653332ccca7e8b9e80b0f272e5d407091d0b4f59426dc46a7994"
-    "sha256=f13ab39c36099d301f21077af6c806c710b4420c6145d110676d0b148c9d0cde"
+    "md5=5e38f6cfb3dffe652e98b8d38905376f"
+    "sha512=50a7e8bd7036c1c48b4132ba34301df7e4011c619177fed28ec96bffce99acb228dc4fe6fc24bff313b9ae3ba5c6da424189e6a8220b87c918ea20d08e1caca2"
+    "sha256=d5bd959c4e1e8af4bb6b5d6e0812b5b3b38c122d7a2620048c2d7ad33cd0c063"
   ]
 }
