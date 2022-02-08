@@ -44,3 +44,12 @@ post-messages: [
    to force a sequential build instead."
   {failure & jobs > 1 & opam-version >= "2.0.5"}
 ]
+patches: ["alt-signal-stack.patch"]
+extra-source "alt-signal-stack.patch" {
+  src:
+    "https://github.com/ocaml/ocaml/commit/1eeb0e7fe595f5f9e1ea1edbdf785ff3b49feeeb.patch"
+  checksum: [
+    "sha256=59de25b95409c1927c4b607fb4b1218ff7623fca45474448c8e114a42853e3ad"
+    "sha512=19c7d19be804110e968866b4355871cdeb23bd4d56c18288bc0040d59702b7ee541e8bb6d49f64fa3b5a1232b50821efb50cd17544d3a2d20d760dece69e67c7"
+  ]
+}
