@@ -4,21 +4,28 @@ authors: [
   "Petter A. Urkedal <paurkedal@gmail.com>"
   "Nathan Rebours <nathan@cryptosense.com>"
 ]
-license: "LGPL-3.0-or-later WITH OCaml-LGPL-linking-exception"
+license: "LGPL-3.0-or-later WITH LGPL-3.0-linking-exception"
 homepage: "https://github.com/paurkedal/ocaml-caqti/"
 doc: "https://paurkedal.github.io/ocaml-caqti/index.html"
 bug-reports: "https://github.com/paurkedal/ocaml-caqti/issues"
 depends: [
+  "alcotest" {>= "1.5.0"}
+  "angstrom" {>= "0.14.0"}
+  "bigstringaf"
+  "cmdliner" {with-test & < "1.1.0"}
   "cppo" {build & >= "1.1.0"}
-  "dune" {>= "1.11"}
+  "dune" {>= "2.0"}
   "logs"
   "ocaml" {>= "4.04.0"}
+  "odoc" {with-doc}
   "ptime"
+  "re" {with-test}
   "uri" {>= "1.9.0"}
 ]
 build: [
   ["dune" "build" "-p" name "-j" jobs]
   ["dune" "runtest" "-p" name "-j" jobs] {with-test}
+  ["dune" "build" "@doc" "-p" name "-j" jobs] {with-doc}
 ]
 dev-repo: "git+https://github.com/paurkedal/ocaml-caqti.git"
 synopsis: "Unified interface to relational database libraries"
@@ -38,12 +45,12 @@ and only provides the type information needed at the edges of communication
 between the OCaml code and the database; i.e. for encoding parameters and
 decoding returned tuples. It is hoped that this agnostic choice makes it a
 suitable target for higher level interfaces and code generators."""
-x-commit-hash: "b8857da5edca852295c1d11f6b185bef196e70b2"
 url {
   src:
-    "https://github.com/paurkedal/ocaml-caqti/releases/download/v1.6.0/caqti-v1.6.0.tbz"
+    "https://github.com/paurkedal/ocaml-caqti/releases/download/v1.7.0/caqti-v1.7.0.tbz"
   checksum: [
-    "sha256=1bf0c0d60547033c10d6148cf5297b25ab66c9a2832b680329df2f3816bc674d"
-    "sha512=0b03bd1788d99bbac59679338768a5633ec473346eed333fca4c104bc88f04c24e138af2228fc20dcf295b7106778328d228643ae8235a3f722f54cc69919295"
+    "sha256=a363cfcc15f2a3ab9721d08789a65aaa1108d27f974a9b68425a889596e27fb8"
+    "sha512=982b9c65fde0405b5d33822ff2743d1c8a8c0611dcd6615dd0af5b32048262f7ddbcae8434193cfd2b7ee845f29c2821d869862b34086099fcffc912b51d61a2"
   ]
 }
+x-commit-hash: "2448138a9102f54d2d971cf1f6923420477ee14b"
