@@ -14,31 +14,29 @@ build: [
 
 depends: [
   "ocaml"        {>= "4.08.0"}
-  "dune"         {>= "2.7.0"}
+  "dune"         {>= "2.9.0"}
   "irmin"        {= version}
-  "irmin-layers" {= version}
   "ppx_irmin"    {= version}
-  "index"        {>= "1.5.0"}
+  "index"        {>= "1.6.0"}
   "fmt"
   "logs"
   "lwt"          {>= "5.3.0"}
   "mtime"
-  "cmdliner" {< "1.1.0"}
+  "cmdliner"     {< "1.1.0"}
   "optint"       {>= "0.1.0"}
   "irmin-test"   {with-test & = version}
   "alcotest-lwt" {with-test}
   "astring"      {with-test}
-  "fpath"        {with-test}
   "alcotest"     {with-test}
 ]
 
 synopsis: "Irmin backend which stores values in a pack file"
 url {
   src:
-    "https://github.com/mirage/irmin/releases/download/2.10.2/irmin-2.10.2.tbz"
+    "https://github.com/mirage/irmin/releases/download/3.1.0/irmin-3.1.0.tbz"
   checksum: [
-    "sha256=088741b619471c8198e74aaf9f4aeb4a9997abec8b9abcbfb3443fd27bfb433f"
-    "sha512=bbc03417d6eb87d99bee391c489d23a586b0a260e4c797f5e2465c3ab67cb627a9efa526097c1b89dd3339eafb8bad738c1cf0502e5c70355871ff7dbba324b9"
+    "sha256=d84fa343a841f663969ed6b08e5fc1b704d3ab7974858aa29471fe291a6a2f86"
+    "sha512=ab5eb4bd08ab69b97c8b9a72181c5b59d3d515e4ba63550d8a4551ec8ea72cd2d3b302fe0812379553e52891f81a9ae5d4d668382155d9c6c6eb75844a48477e"
   ]
 }
-x-commit-hash: "9a2731c84eb8a9cef3a53b041d068b493979d14b"
+x-commit-hash: "dbe98b1f2681d506b53cd0f6cdf62dfe6ae19275"
