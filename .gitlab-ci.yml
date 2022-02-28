@@ -43,8 +43,6 @@ docker-hadolint:
     - hadolint runtime-build-test-dependencies.Dockerfile
 
 # this job builds the build docker images for amd64
-# but the job is restricted to nomadic labs and safe_docker
-# it is used for development
 build-safe:
   <<: *build-definition
   variables:
@@ -53,8 +51,6 @@ build-safe:
   only:
     - //@tezos/opam-repository
     - //@nomadic-labs/opam-repository
-  tags:
-    - safe_docker
 
 # this job builds the build docker images for arm64
 # but the job is restricted to nomadic labs and arm64
