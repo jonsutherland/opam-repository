@@ -28,10 +28,10 @@ build: [
 synopsis: "Library of JSON and binary encoding combinators"
 url {
   src:
-    "https://gitlab.com/nomadic-labs/data-encoding/-/archive/v0.5/data-encoding-v0.5.tar.gz"
+    "https://gitlab.com/nomadic-labs/data-encoding/-/archive/v0.5.1/data-encoding-v0.5.1.tar.gz"
   checksum: [
-    "md5=0c97d67c12d905800c9f80f718c3429e"
-    "sha512=801cd42bb52a7de52bcf6059d08617e40a9b0b53dbd98b5f33b8813c6640c47cd13a9bb8ee83541b2346edd7a2ed7c6f0d9ea67c0933d62ca135a335c2f2970f"
-    "sha256=4ef74f66fec8ca8177ac2c062ba8691d1610877c7639c905151be3a27a0b847e"
+    "md5=c91116d318ffd0e3f5d75f307d9cc2ce"
+    "sha512=495bc4058b8fc1051d16e64ab77dea288675c39574acb603be514ee7c497be26baa0944bdc081f4faa34ba03c0b3dbd6059544375d2f2bee6c634a5ec11d899b"
+    "sha256=b8a5c6949f4c8ed74a825cc06787e78b75694095563ab594fc629f23966aadaa"
   ]
 }
