@@ -7,7 +7,7 @@ dev-repo: "git+https://gitlab.com/nomadic-labs/lwt-watcher.git"
 license: "MIT"
 depends: [
   "ocaml"
-  "dune" {< "3.0"}
+  "dune" {>= "1.11"}
   "lwt"
 ]
 build: [
@@ -16,10 +16,10 @@ build: [
 synopsis: "One-to-many broadcast in Lwt"
 url {
   src:
-    "https://gitlab.com/nomadic-labs/lwt-watcher/-/archive/v0.1/lwt-watcher-v0.1.tar.gz"
+    "https://gitlab.com/nomadic-labs/lwt-watcher/-/archive/v0.2/lwt-watcher-v0.2.tar.gz"
   checksum: [
-    "md5=85fa938c25895aad8f47872ed5225a4e"
-    "sha512=7a93368ab6133e17fdf8512c28380fdba5bd0eb397deac9c7018278138b4fa4e4d65b5f32af624a0c725087640ae105be890d93d9019ca90352c36fb43183b14"
-    "sha256=a500212661f4385e25fab54477299cb4df4593d447c08d9629ecb0d5670cb45a"
+    "md5=2922ce8459eeacbd3d8819b2915d7128"
+    "sha512=11b16761ff025c39adbd177de511b1a4c8cc3e307d96111e04ed3058ae5d7577f940e2fe7fc9cbdc54ef0923aab62820f87f457c95ba18ebd2050ff7b9f075f9"
+    "sha256=0d7e64ed1ae54c3e0223eaf11b24c6e2a90501236a5ee142bc1cd28d06b913cf"
   ]
 }
