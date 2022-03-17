@@ -26,16 +26,16 @@ depends: [
   "ocaml" {>= "3.12.1"}
   "dune" {>= "2.8.0"}
   "ocamlfind" {build}
-  "stdcompat" {>= "17"}
+  "stdcompat" {>= "18"}
   "conf-python-3-dev" {with-test}
   "odoc" {with-doc}
 ]
 depopts: ["utop"]
 url {
   src:
-    "https://github.com/thierry-martinez/pyml/archive/refs/tags/20211015.tar.gz"
+    "https://github.com/thierry-martinez/pyml/releases/download/20220322/pyml-20220322.tar.gz"
   checksum: [
-    "sha512=79237ab56a2e439e785f4d873abd603fdaa51dbbb1258efb25102ca897826cf4d5d15e8467f324df85bba3c61995ceee8fb82d0808cda0da8010e024a78307aa"
-    "sha256=4ef930b3ff8c7c4115b87eabd194795fa1da3aedbebbdcddf82af84eadbb94ab"
+    "sha512=a7835061afab1e092f44c1e03dc7898ed570443939f7deb2ad5e530aed0ac486b944df0cbd96c5d6371a1e129d0851dec5c4c6967d2a4bb0950532d48ab6e9a5"
+    "sha256=a0de515a0a332e30fffe64505a3eb482e9ff27271c4c0f09b042bf0f7b369e00"
   ]
 }

@@ -23,15 +23,15 @@ depends: [
 ]
 build: [
   ["dune" "build" "-p" name "-j" jobs]
-  ["dune" "runtest" "-p" name "-j" jobs] {with-test}
+  ["dune" "runtest" "-p" name "-j" jobs] {with-test & arch != "arm32" & arch != "x86_32"}
 ]
 synopsis: "Library of JSON and binary encoding combinators"
 url {
   src:
-    "https://gitlab.com/nomadic-labs/data-encoding/-/archive/v0.5.1/data-encoding-v0.5.1.tar.gz"
+    "https://gitlab.com/nomadic-labs/data-encoding/-/archive/v0.5.3/data-encoding-v0.5.3.tar.gz"
   checksum: [
-    "md5=c91116d318ffd0e3f5d75f307d9cc2ce"
-    "sha512=495bc4058b8fc1051d16e64ab77dea288675c39574acb603be514ee7c497be26baa0944bdc081f4faa34ba03c0b3dbd6059544375d2f2bee6c634a5ec11d899b"
-    "sha256=b8a5c6949f4c8ed74a825cc06787e78b75694095563ab594fc629f23966aadaa"
+    "md5=391d89f561ff496a15ad1c8a79b8bd5d"
+    "sha512=a66487f000e9ebb8abc655d6cf830b1d4877d00023541e61f1067df3480ec5fc31bbca5e2b46503f964511341176b3aeb51a4e1603764ad7d6591b3c709cf088"
+    "sha256=5d9951967a7224afba669b6e229dfcbf525a7d8c8fcb13f0df4e20f661b4f5bd"
   ]
 }

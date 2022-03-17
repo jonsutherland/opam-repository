@@ -21,7 +21,7 @@ depends: [
   "base-unix"
   "cmdliner" {>= "1.0.0"}
   "dune" {>= "2.7.0"}
-  "ocaml" {>= "4.02.0"}
+  "ocaml" {>= "4.03.0"}
   "ppxlib" {>= "0.21.0"}
 
   "ocamlformat" {with-test & = "0.16.0"}
@@ -41,10 +41,10 @@ Usage is simple - add package bisect_ppx when building tests, run your tests,
 then run the Bisect_ppx report tool on the generated visitation files."
 
 url {
-  src: "https://github.com/aantron/bisect_ppx/archive/2.8.0.tar.gz"
+  src: "https://github.com/aantron/bisect_ppx/archive/2.8.1.tar.gz"
   checksum: [
-    "md5=ba8c80cd2bf6b86537296736a4c6ba89"
-    "sha256=0d6e6f64db9ea932439c773a8ac504d36d154b4b9ad7b3282d3d37c1f63c5377"
-    "sha512=939a9ff38a1475bc76a9477e12128ce3c5206a255cf35f976bb20febb60fc231c899b4bfd58d166a76d796b5a2906fab1a917033590269a641747cd7111ecb8e"
+    "md5=e8831e6e99292f221ded6fb02652e2a5"
+    "sha256=d51292dab8d49a1487bddb8b9c0153a959382097589b0d017683a1d45ec48d93"
+    "sha512=6becffb012bcd02cf8042e3f21cc0f1b6ae18984077951c8213f31ae931b0ba69d4b04ae0b1976d59919fd378e5197b49310a6c80ef3a6e06fb48275ed79c149"
   ]
 }

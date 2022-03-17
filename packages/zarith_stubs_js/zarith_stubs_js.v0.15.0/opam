@@ -20,10 +20,9 @@ all of the Zarith C stubs in Javascript for use in Js_of_ocaml
 "
 url {
   src:
-    "https://github.com/janestreet/zarith_stubs_js/archive/refs/tags/v0.14.1.tar.gz"
+    "https://ocaml.janestreet.com/ocaml-core/v0.15/files/zarith_stubs_js-v0.15.0.tar.gz"
   checksum: [
-    "md5=948430731b9e3d0890cfc930b6829c37"
-    "sha256=2cea7cb6046a3058184491559b458c9a79ed7d431c9fd7e1fbc6562013556a56"
-    "sha512=f605884cd48cead04bf09e6be8741a054c4a296855979646de0e66d138dddbd510d4577ad80723bdb3a7b63d0a90751d48772d78c7f60a85e6cfa59854b399bf"
+    "sha256=fa5e32f883d677e2a84eed124ed17f078fe28217238009c8c1fd7123b922530f"
+    "sha512=2376031fd0e5adf8e3e77ce0ade4adfc15eb1ec9b13a6508a65ba83954151cb144b5f2740e9b5060a128d023adb8bb411dfb2de3bfd690c3511a7c8edbdd3d36"
   ]
 }
