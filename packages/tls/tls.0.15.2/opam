@@ -17,27 +17,28 @@ depends: [
   "dune" {>= "1.0"}
   "ppx_sexp_conv" {>= "v0.9.0"}
   "ppx_cstruct" {>= "3.0.0"}
-  "cstruct" {>= "4.0.0"}
+  "cstruct" {>= "6.0.0"}
   "cstruct-sexp"
   "sexplib"
   "mirage-crypto" {>= "0.8.1"}
   "mirage-crypto-ec" {>= "0.10.0"}
   "mirage-crypto-pk"
   "mirage-crypto-rng" {>= "0.8.0"}
-  "x509" {>= "0.13.0" & < "0.15.0"}
+  "x509" {>= "0.15.0"}
   "domain-name" {>= "0.3.0"}
-  "fmt"
-  "rresult"
+  "fmt" {>= "0.8.7"}
   "cstruct-unix" {with-test & >= "3.0.0"}
   "ounit2" {with-test & >= "2.2.0"}
   "lwt" {>= "3.0.0"}
   "ptime" {>= "0.8.1"}
   "hkdf"
   "logs"
+  "ipaddr"
+  "ipaddr-sexp"
   "alcotest" {with-test}
   "randomconv" {with-test}
 ]
-
+conflicts: [ "result" {< "1.5"} ]
 tags: [ "org:mirage"]
 synopsis: "Transport Layer Security purely in OCaml"
 description: """
@@ -55,15 +56,15 @@ algorithm, and hash algorithm are negotiated.
 
 Read [further](https://nqsb.io) and our [Usenix Security 2015 paper](https://usenix15.nqsb.io).
 """
-x-commit-hash: "befd1ab0e38a6a4971002be9e58db7081685ab12"
 authors: [
   "David Kaloper <david@numm.org>" "Hannes Mehnert <hannes@mehnert.org>"
 ]
 url {
   src:
-    "https://github.com/mirleft/ocaml-tls/releases/download/v0.13.2/tls-v0.13.2.tbz"
+    "https://github.com/mirleft/ocaml-tls/releases/download/v0.15.2/tls-v0.15.2.tbz"
   checksum: [
-    "sha256=204e85baf7a6f00de567f33c18b358370086fafec16cf43841d612f9f293e747"
-    "sha512=dabfbcc1bb096e00f0b11ab171aa9b59553230091453796417f2b0901427335ab81f690e45fb5313c903e2eecb1020eb10e6171debf881abbfeebee02fb30bcd"
+    "sha256=b76371757249bbeabb12c333de4ea2a09c095767bdbbc83322538c0da1fc1e36"
+    "sha512=e6e089a853848e82647bc3f6ecaa3a95cdb559e50b7ad9d06064c1fd0c931b0e942ff0877c8066ec79b6b42a29512449ba1a5c6de1f1502cdbfc3397546f417c"
   ]
 }
+x-commit-hash: "0ba4883e9372495682e3407817614f17ddf002d7"

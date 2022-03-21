@@ -17,12 +17,11 @@ depends: [
   "cstruct" {>= "6.0.0"}
   "asn1-combinators" {>= "0.2.0"}
   "ptime"
-  "base64" {>= "3.1.0"}
+  "base64" {>= "3.3.0"}
   "mirage-crypto"
   "mirage-crypto-pk"
   "mirage-crypto-ec" {>= "0.10.0"}
   "mirage-crypto-rng"
-  "rresult"
   "fmt" {>= "0.8.7"}
   "alcotest" {with-test}
   "cstruct-unix" {with-test & >= "3.0.0"}
@@ -30,7 +29,9 @@ depends: [
   "domain-name" {>= "0.3.0"}
   "logs"
   "pbkdf"
+  "ipaddr" {>= "5.2.0"}
 ]
+conflicts: [ "result" {< "1.5"} ]
 build: [
   ["dune" "subst"] {dev}
   ["dune" "build" "-p" name "-j" jobs]
@@ -49,10 +50,10 @@ namely PKCS 1, PKCS 5, PKCS 7, PKCS 8, PKCS 9, PKCS 10, and PKCS 12.
 """
 url {
   src:
-    "https://github.com/mirleft/ocaml-x509/releases/download/v0.14.1/x509-v0.14.1.tbz"
+    "https://github.com/mirleft/ocaml-x509/releases/download/v0.16.0/x509-0.16.0.tbz"
   checksum: [
-    "sha256=d91eb4f2790f9d098713c71cc4b5d12706aedb1795666b5e6d667fe5c262f9c3"
-    "sha512=aaf0b7bfe23fa02028d6cde0a83a189ce7dccba7cf64d475c27ea66e8b7801b17f8776abcaca5d15cc33a0e396fdda4695f5c56eef9ed24a66bd066a37cc8954"
+    "sha256=67a6727fb4c38b919334eef2f8ef4eac0237029a439ff981d408eca8b9833595"
+    "sha512=c9b4cf55d16d8b1e6b6faa18fc9ac08065fa09937f07a3447d4b637539b37bea6374c98d184eba159a8ba8eba860303a78563097e47ef30529fedaaf722115c6"
   ]
 }
-x-commit-hash: "6f3044bbe996d77bfdf29c34bbbbe59c8444669f"
+x-commit-hash: "e87d4baef3faedc05e1e4f2e36e16a4def5894ff"

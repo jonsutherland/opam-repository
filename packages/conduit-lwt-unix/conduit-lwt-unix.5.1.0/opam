@@ -9,19 +9,23 @@ homepage: "https://github.com/mirage/ocaml-conduit"
 bug-reports: "https://github.com/mirage/ocaml-conduit/issues"
 depends: [
   "ocaml" {>= "4.07.0"}
-  "dune"
+  "dune" {>= "2.0"}
   "base-unix"
-  "ppx_sexp_conv" {>="v0.12.0"}
-  "conduit-lwt" {>="2.1.0" & <"2.3.0"}
+  "logs"
+  "ppx_sexp_conv" {>="v0.13.0"}
+  "conduit-lwt" {=version}
   "lwt" {>= "3.0.0"}
   "uri" {>= "1.9.4"}
   "ipaddr" {>= "4.0.0"}
   "ipaddr-sexp"
+  "ca-certs"
+  "lwt_log" {with-test}
+  "ssl" {with-test}
+  "lwt_ssl" {with-test}
 ]
 depopts: ["tls" "lwt_ssl" "launchd"]
 conflicts: [
-  "tls" {< "0.12.2"}
-  "tls" {>= "0.14.0"}
+  "tls" {< "0.14.0"}
   "ssl" {< "0.5.9"}
 ]
 build: [
@@ -32,9 +36,10 @@ dev-repo: "git+https://github.com/mirage/ocaml-conduit.git"
 synopsis: "A network connection establishment library for Lwt_unix"
 url {
   src:
-    "https://github.com/mirage/ocaml-conduit/releases/download/v2.2.2/conduit-v2.2.2.tbz"
+    "https://github.com/mirage/ocaml-conduit/releases/download/v5.1.0/conduit-5.1.0.tbz"
   checksum: [
-    "sha256=a57cc1843aa7eaaa183a5d08d98a13e78c848b37aabb7b55ee88257c051f68fd"
-    "sha512=c2ca50cdae36f6b9cef4053844a4b719e4e065997a2dc6e1858f8c0bc3ce03d5728d10308368f1968154d217dfc84038cd1de007b1168e7adf476dc57af3f513"
+    "sha256=e51c8c3e879cbbe9e09989b00595093832dc86642088072e03e5a59a2a2391cd"
+    "sha512=ffe4ca1e372a94db999f51fe4903f4a8f2f3ddb079cd0470c499dbd61109674df8de968e535c1c6f5bd7b00a6aed2c6b6d193c8dcf370102e27150903646a73e"
   ]
 }
+x-commit-hash: "033cfd416f612095a3b6e67fedbc1dc779543201"
