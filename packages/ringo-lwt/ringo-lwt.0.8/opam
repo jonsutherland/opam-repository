@@ -18,10 +18,10 @@ build: [
 synopsis: "Lwt-wrappers for Ringo caches"
 url {
   src:
-    "https://gitlab.com/nomadic-labs/ringo/-/archive/v0.7/ringo-v0.7.tar.gz"
+    "https://gitlab.com/nomadic-labs/ringo/-/archive/v0.8/ringo-v0.8.tar.gz"
   checksum: [
-    "md5=e32bbf680f33158cac632d5bcef478cb"
-    "sha512=1e5daa9c5741ebce5a0265227674daed9f1bf7a2acd9be8ea655ae26220f85e003fb4ac3783253391ea6780d8bef9cd057df62c3872a9f6e6871852b4df3dc74"
-    "sha256=59dfafc2de4bdd696a2c2dfa290764940bc2ed0578f44bf2c8da0702a177bcaa"
+    "md5=a0b3e072bbc3541b60196de967ed266a"
+    "sha512=b6a12de26fa58ac5f5c3a49963d3b76dfbe391f86ef14c97715d2fccb439daf7c2e602c15b48e1db9d933832f3ee2171adb1f990f3c15be5f33ae815ce5cf7a8"
+    "sha256=0918cfc2cd3109b004145af5be85280ca1a9fc5439c633abb99a4ec88c128d96"
   ]
 }
