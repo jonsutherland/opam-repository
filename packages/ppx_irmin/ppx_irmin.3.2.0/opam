@@ -25,10 +25,10 @@ synopsis: "PPX deriver for Irmin type representations"
 authors: "Craig Ferguson <craig@tarides.com>"
 url {
   src:
-    "https://github.com/mirage/irmin/releases/download/3.1.0/irmin-3.1.0.tbz"
+    "https://github.com/mirage/irmin/releases/download/3.2.0/irmin-3.2.0.tbz"
   checksum: [
-    "sha256=d84fa343a841f663969ed6b08e5fc1b704d3ab7974858aa29471fe291a6a2f86"
-    "sha512=ab5eb4bd08ab69b97c8b9a72181c5b59d3d515e4ba63550d8a4551ec8ea72cd2d3b302fe0812379553e52891f81a9ae5d4d668382155d9c6c6eb75844a48477e"
+    "sha256=969f54f1e3a0d301169ed918916f550a7db6bc96a9b6309dacf02fff8e1785cc"
+    "sha512=6b58ec1caaa6bf4583853bb0ba377eb361653952dce1dbd1585a7b1988ad8a4cc64d373f8e2d2972a2a182af2ce9635e188600954814fa9f4da54f271002a9b6"
   ]
 }
-x-commit-hash: "dbe98b1f2681d506b53cd0f6cdf62dfe6ae19275"
+x-commit-hash: "b9642d318b7c5558e9da31c3447478d8fc4a77da"
