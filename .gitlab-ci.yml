@@ -3,18 +3,25 @@ stages:
   - build
   - publish
 
+# Match GitLab executors version and directly use the Docker socket
+# The Docker daemon is already configured, experimental features are enabled
+# The following environment variables are already set:
+# - BUILDKIT_PROGRESS
+# - DOCKER_DRIVER
+# - DOCKER_VERSION
+# https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-socket-binding
+.image_template__docker:
+  image: docker:20.10.12
+
 # the build template is used by all build jobs
 # The use the variable IMAGE_ARCH_PREFIX that is then used when merging
 # the docker images in one manifesto
-#
 .build-template: &build-definition
   stage: build
-  image: docker:latest
+  extends:
+    - .image_template__docker
   variables:
-    DOCKER_DRIVER: overlay2
     IMAGE_ARCH_PREFIX: ""
-  services:
-    - docker:dind
   script:
     - . ./scripts/version.sh
     - docker login -u "${CI_REGISTRY_USER}" -p "${CI_REGISTRY_PASSWORD}" "${CI_REGISTRY}"
@@ -34,7 +41,7 @@ stages:
 
 # this step checks that all docker spec files using the tool hadolint
 docker-hadolint:
-  image: hadolint/hadolint:latest-debian
+  image: hadolint/hadolint:2.9.3-debian
   stage: lint
   script:
     - hadolint runtime-dependencies.Dockerfile
@@ -50,7 +57,7 @@ shellcheck:
     - shellcheck -x scripts/*.sh
 
 # this job builds the build docker images for amd64
-build-safe:
+build-amd64:
   <<: *build-definition
   variables:
     ARCH: "x86_64" # variable used to build static packages
@@ -65,7 +72,6 @@ build-safe:
 build-arm64:
   <<: *build-definition
   variables:
-    DOCKER_DRIVER: overlay2
     ARCH: "aarch64" # variable used to build static packages
     IMAGE_ARCH_PREFIX: "arm64--"
   only:
@@ -80,19 +86,11 @@ build-arm64:
 # and thus they don't have the capacity to merge the manifest either.)
 merge-manifest:
   stage: publish
-  image: docker:latest
-  variables:
-    DOCKER_DRIVER: overlay2
+  extends:
+    - .image_template__docker
   needs:
-    - build-safe
+    - build-amd64
     - build-arm64
-  services:
-    - name: "docker:dind"
-      command: ["--experimental"]
-  before_script:
-    # Enable experimental features in Docker client
-    - mkdir $HOME/.docker
-    - "echo -e '{\n  \"experimental\": \"enabled\"\n}' | tee $HOME/.docker/config.json"
   script:
     - . ./scripts/version.sh
     - docker login -u "${CI_REGISTRY_USER}" -p "${CI_REGISTRY_PASSWORD}" "${CI_REGISTRY}"
