@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/sh
 
 export alpine_version=3.14
 
