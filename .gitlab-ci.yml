@@ -1,9 +1,11 @@
+---
 stages:
   - lint
   - build
   - publish
+  - mirror
 
-# Match GitLab executors version and directly use the Docker socket
+# Match GitLab executors Docker version and directly use the Docker socket
 # The Docker daemon is already configured, experimental features are enabled
 # The following environment variables are already set:
 # - BUILDKIT_PROGRESS
@@ -11,7 +13,11 @@ stages:
 # - DOCKER_VERSION
 # https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-socket-binding
 .image_template__docker:
-  image: docker:20.10.12
+  # https://gitlab.com/tezos/docker-images/ci-docker
+  image: "${CI_REGISTRY}/tezos/docker-images/ci-docker:v1.4.0"
+  before_script:
+    # Credentials for Docker registries
+    - ./scripts/docker_registry_auth.sh
 
 # the build template is used by all build jobs
 # The use the variable IMAGE_ARCH_PREFIX that is then used when merging
@@ -24,23 +30,18 @@ stages:
     IMAGE_ARCH_PREFIX: ""
   script:
     - . ./scripts/version.sh
-    - docker login -u "${CI_REGISTRY_USER}" -p "${CI_REGISTRY_PASSWORD}" "${CI_REGISTRY}"
     - ./scripts/create_docker_image.sh "${CI_REGISTRY_IMAGE}" "${IMAGE_ARCH_PREFIX}${CI_COMMIT_SHA}" "${ARCH}"
-    # push
     - docker push "${CI_REGISTRY_IMAGE}:runtime-dependencies--${IMAGE_ARCH_PREFIX}${CI_COMMIT_SHA}"
     - docker push "${CI_REGISTRY_IMAGE}:runtime-prebuild-dependencies--${IMAGE_ARCH_PREFIX}${CI_COMMIT_SHA}"
     - docker push "${CI_REGISTRY_IMAGE}:runtime-build-dependencies--${IMAGE_ARCH_PREFIX}${CI_COMMIT_SHA}"
     - docker push "${CI_REGISTRY_IMAGE}:runtime-build-test-dependencies--${IMAGE_ARCH_PREFIX}${CI_COMMIT_SHA}"
 
 # this step checks that all docker spec files using the tool hadolint
-docker-hadolint:
-  image: hadolint/hadolint:2.9.3-debian
+hadolint:
+  image: hadolint/hadolint:v2.10.0-debian
   stage: lint
   script:
-    - hadolint runtime-dependencies.Dockerfile
-    - hadolint runtime-prebuild-dependencies.Dockerfile
-    - hadolint runtime-build-dependencies.Dockerfile
-    - hadolint runtime-build-test-dependencies.Dockerfile
+    - hadolint *Dockerfile
 
 # this step checks that all scripts pass shellcheck
 shellcheck:
@@ -77,16 +78,11 @@ build-arm64:
 # on Nomadic Labs' repository.
 # (Forks don't have the capacity to build arm64 images
 # and thus they don't have the capacity to merge the manifest either.)
-merge-manifest:
+manifest:
   stage: publish
   extends:
     - .image_template__docker
-  needs:
-    - build-amd64
-    - build-arm64
   script:
-    - . ./scripts/version.sh
-    - docker login -u "${CI_REGISTRY_USER}" -p "${CI_REGISTRY_PASSWORD}" "${CI_REGISTRY}"
     - docker manifest create "${CI_REGISTRY_IMAGE}:runtime-dependencies--${CI_COMMIT_SHA}"
       --amend "${CI_REGISTRY_IMAGE}:runtime-dependencies--amd64--${CI_COMMIT_SHA}"
       --amend "${CI_REGISTRY_IMAGE}:runtime-dependencies--arm64--${CI_COMMIT_SHA}"
@@ -107,9 +103,29 @@ merge-manifest:
     - //@tezos/opam-repository
     - //@nomadic-labs/opam-repository
 
+# Mirror Docker image from Gitlab container registry @GCP to private ECR @AWS,
+# closer to GitLab runners/executors. Requires environment variables to be set
+# with AWS credentials and AWS_ECR.
+mirror:
+  stage: mirror
+  extends:
+    - .image_template__docker
+  variables:
+    AWS_ECR_IMAGE: "${AWS_ECR}/${CI_PROJECT_PATH}"
+  script:
+    - ./scripts/mirror_to_ecr.sh
+  only:
+    variables:
+      # Only available on protected branches @nomadic-labs/opam-repository
+      - $AWS_ACCESS_KEY_ID && $AWS_SECRET_ACCESS_KEY && $AWS_ECR
+
 # this is a duplicated job to allow fork to build amd64
 build:
   <<: *build-definition
+  image: docker:20
+  services:
+    - name: docker:20-dind
+      command: ["--experimental"]
   variables:
     ARCH: "x86_64"
     # this variable is empty as we don't want to merge any manifest
