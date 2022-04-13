@@ -29,4 +29,3 @@ docker build \
        --build-arg RUST_VERSION="${rust_version}" \
        -t "$image_name:$image_version" \
        "$repo_dir"
-

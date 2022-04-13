@@ -10,9 +10,6 @@ image_name="${1:-tezos_build_deps}"
 image_version="${2:-latest}"
 arch="${3:?}"
 
-## may pull cache...
-docker pull "registry.gitlab.com/tezos/opam-repository:master" || true > /dev/null 2>&1
-
 "$script_dir"/create_docker_image.runtime-dependencies.sh \
              "$image_name" \
              "runtime-dependencies--$image_version"
@@ -32,4 +29,3 @@ docker pull "registry.gitlab.com/tezos/opam-repository:master" || true > /dev/nu
              "$image_name" \
              "runtime-build-test-dependencies--$image_version" \
              "$image_name:runtime-build-dependencies--$image_version"
-
