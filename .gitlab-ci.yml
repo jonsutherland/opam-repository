@@ -30,11 +30,10 @@ stages:
     IMAGE_ARCH_PREFIX: ""
   script:
     - . ./scripts/version.sh
+    # Build docker images
     - ./scripts/create_docker_image.sh "${CI_REGISTRY_IMAGE}" "${IMAGE_ARCH_PREFIX}${CI_COMMIT_SHA}" "${ARCH}"
-    - docker push "${CI_REGISTRY_IMAGE}:runtime-dependencies--${IMAGE_ARCH_PREFIX}${CI_COMMIT_SHA}"
-    - docker push "${CI_REGISTRY_IMAGE}:runtime-prebuild-dependencies--${IMAGE_ARCH_PREFIX}${CI_COMMIT_SHA}"
-    - docker push "${CI_REGISTRY_IMAGE}:runtime-build-dependencies--${IMAGE_ARCH_PREFIX}${CI_COMMIT_SHA}"
-    - docker push "${CI_REGISTRY_IMAGE}:runtime-build-test-dependencies--${IMAGE_ARCH_PREFIX}${CI_COMMIT_SHA}"
+    # Push docker images
+    - ./scripts/docker_push_all.sh "${IMAGE_ARCH_PREFIX}${CI_COMMIT_SHA}"
 
 # this step checks that all docker spec files using the tool hadolint
 hadolint:
@@ -45,7 +44,7 @@ hadolint:
 
 # this step checks that all scripts pass shellcheck
 shellcheck:
-  image: koalaman/shellcheck-alpine:v0.7.1
+  image: koalaman/shellcheck-alpine:v0.8.0
   stage: lint
   script:
     - shellcheck -x scripts/*.sh
@@ -83,22 +82,7 @@ manifest:
   extends:
     - .image_template__docker
   script:
-    - docker manifest create "${CI_REGISTRY_IMAGE}:runtime-dependencies--${CI_COMMIT_SHA}"
-      --amend "${CI_REGISTRY_IMAGE}:runtime-dependencies--amd64--${CI_COMMIT_SHA}"
-      --amend "${CI_REGISTRY_IMAGE}:runtime-dependencies--arm64--${CI_COMMIT_SHA}"
-    - docker manifest push "${CI_REGISTRY_IMAGE}:runtime-dependencies--${CI_COMMIT_SHA}"
-    - docker manifest create "${CI_REGISTRY_IMAGE}:runtime-prebuild-dependencies--${CI_COMMIT_SHA}"
-      --amend "${CI_REGISTRY_IMAGE}:runtime-prebuild-dependencies--amd64--${CI_COMMIT_SHA}"
-      --amend "${CI_REGISTRY_IMAGE}:runtime-prebuild-dependencies--arm64--${CI_COMMIT_SHA}"
-    - docker manifest push "${CI_REGISTRY_IMAGE}:runtime-prebuild-dependencies--${CI_COMMIT_SHA}"
-    - docker manifest create "${CI_REGISTRY_IMAGE}:runtime-build-dependencies--${CI_COMMIT_SHA}"
-      --amend "${CI_REGISTRY_IMAGE}:runtime-build-dependencies--amd64--${CI_COMMIT_SHA}"
-      --amend "${CI_REGISTRY_IMAGE}:runtime-build-dependencies--arm64--${CI_COMMIT_SHA}"
-    - docker manifest push "${CI_REGISTRY_IMAGE}:runtime-build-dependencies--${CI_COMMIT_SHA}"
-    - docker manifest create "${CI_REGISTRY_IMAGE}:runtime-build-test-dependencies--${CI_COMMIT_SHA}"
-      --amend "${CI_REGISTRY_IMAGE}:runtime-build-test-dependencies--amd64--${CI_COMMIT_SHA}"
-      --amend "${CI_REGISTRY_IMAGE}:runtime-build-test-dependencies--arm64--${CI_COMMIT_SHA}"
-    - docker manifest push "${CI_REGISTRY_IMAGE}:runtime-build-test-dependencies--${CI_COMMIT_SHA}"
+    - ./scripts/docker_merge_manifests.sh
   only:
     - //@tezos/opam-repository
     - //@nomadic-labs/opam-repository

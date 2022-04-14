@@ -44,7 +44,8 @@ if [ -z "$OPAMSWITCH" ]; then
 fi
 if ! opam switch list --short | grep --quiet --fixed-strings --line-regexp "$OPAMSWITCH"; then
     echo "Variable OPAMSWITCH does not point to a valid opam switch: $OPAMSWITCH"
-    readonly LATEST_SWITCH=$(opam switch list --short | head -n 1)
+    LATEST_SWITCH=$(opam switch list --short | head -n 1)
+    readonly LATEST_SWITCH
     if [ -z "$LATEST_SWITCH" ]; then
         echo "No opam switch installed"
     else

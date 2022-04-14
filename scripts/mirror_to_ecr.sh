@@ -8,8 +8,8 @@ set -eu
 
 set -x
 
-for docker_image in ${docker_images}
+for tag_prefix in ${docker_images}
 do
-  regctl image copy "${CI_REGISTRY_IMAGE}:${docker_image}--${CI_COMMIT_SHA}" \
-                    "${AWS_ECR_IMAGE}:${docker_image}--${CI_COMMIT_SHA}"
+  regctl image copy "${CI_REGISTRY_IMAGE}:${tag_prefix}--${CI_COMMIT_SHA}" \
+                    "${AWS_ECR_IMAGE}:${tag_prefix}--${CI_COMMIT_SHA}"
 done
