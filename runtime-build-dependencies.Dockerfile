@@ -10,7 +10,6 @@
 # - building tezos from source
 # - building the runtime-build-test-dependencies image
 
-
 ARG BUILD_IMAGE
 
 # hadolint ignore=DL3006

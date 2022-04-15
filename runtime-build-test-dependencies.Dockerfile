@@ -12,7 +12,6 @@
 # This image is intended for
 # - running the CI tests of tezos
 
-
 ARG BUILD_IMAGE
 
 # hadolint ignore=DL3006

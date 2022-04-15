@@ -7,7 +7,6 @@
 # - distributing the tezos binaries in
 # - building the runtime-prebuild-dependencies, runtime-build-dependencies, and runtime-build-test-dependencies images
 
-
 ARG BUILD_IMAGE
 
 # hadolint ignore=DL3006
@@ -28,7 +27,14 @@ LABEL org.label-schema.vendor="Nomadic Labs" \
 USER root
 
 # hadolint ignore=DL3018
-RUN apk --no-cache add libev gmp sudo hidapi libffi gcc libc-dev
+RUN apk --no-cache add \
+    gcc \
+    gmp \
+    hidapi \
+    libc-dev \
+    libev \
+    libffi \
+    sudo
 
 COPY zcash-params /usr/share/zcash-params
 

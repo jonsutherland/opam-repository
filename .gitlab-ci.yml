@@ -19,19 +19,20 @@ stages:
     # Credentials for Docker registries
     - ./scripts/docker_registry_auth.sh
 
-# the build template is used by all build jobs
-# The use the variable IMAGE_ARCH_PREFIX that is then used when merging
-# the docker images in one manifesto
+# Build template is used by all build jobs
+# Variables needs to be set properly
 .build-template: &build-definition
   stage: build
   extends:
     - .image_template__docker
   variables:
-    IMAGE_ARCH_PREFIX: ""
+    ARCH: ""               # Used by `scripts/build-libusb-hidapi.sh` to build static packages
+    IMAGE_ARCH_PREFIX: ""  # Used for Docker image tags
+    TARGETARCH: ""         # Docker build argument for architecture specific instructions
   script:
     - . ./scripts/version.sh
     # Build docker images
-    - ./scripts/create_docker_image.sh "${CI_REGISTRY_IMAGE}" "${IMAGE_ARCH_PREFIX}${CI_COMMIT_SHA}" "${ARCH}"
+    - ./scripts/create_docker_image.sh "${CI_REGISTRY_IMAGE}" "${IMAGE_ARCH_PREFIX}${CI_COMMIT_SHA}" "${ARCH}" "${TARGETARCH}"
     # Push docker images
     - ./scripts/docker_push_all.sh "${IMAGE_ARCH_PREFIX}${CI_COMMIT_SHA}"
 
@@ -53,8 +54,9 @@ shellcheck:
 build-amd64:
   <<: *build-definition
   variables:
-    ARCH: "x86_64" # variable used to build static packages
+    ARCH: "x86_64"
     IMAGE_ARCH_PREFIX: "amd64--"
+    TARGETARCH: "amd64"
   only:
     - //@tezos/opam-repository
     - //@nomadic-labs/opam-repository
@@ -65,8 +67,9 @@ build-amd64:
 build-arm64:
   <<: *build-definition
   variables:
-    ARCH: "aarch64" # variable used to build static packages
+    ARCH: "aarch64"
     IMAGE_ARCH_PREFIX: "arm64--"
+    TARGETARCH: "arm64"
   only:
     - //@tezos/opam-repository
     - //@nomadic-labs/opam-repository

@@ -1,6 +1,5 @@
 #!/bin/sh
-
-set -e
+set -eu
 
 script_dir="$(cd "$(dirname "$0")" && echo "$(pwd -P)/")"
 repo_dir="$(dirname "$script_dir")"
