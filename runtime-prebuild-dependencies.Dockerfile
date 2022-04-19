@@ -47,7 +47,10 @@ WORKDIR /home/tezos
 RUN mkdir ~/.ssh && \
     chmod 700 ~/.ssh && \
     git config --global user.email "ci@tezos.com" && \
-    git config --global user.name "Tezos CI"
+    git config --global user.name "Tezos CI" && \
+    # FIXME: Bypass CVE-2022-24765 fixed in git 2.30.3, 2.31.2, 2.32.1, 2.34.2, 2.35.2 and later versions
+    # https://github.com/git/git/blob/master/Documentation/RelNotes/2.30.3.txt
+    git config --global --add safe.directory /builds/tezos/tezos
 
 COPY --chown=tezos:nogroup repo opam-repository/
 COPY --chown=tezos:nogroup packages opam-repository/packages
