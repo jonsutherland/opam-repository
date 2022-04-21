@@ -2,9 +2,10 @@
 set -eu
 
 ## Multi-arch docker images with a single tag
-
 # shellcheck source=./scripts/docker.sh
 . ./scripts/docker.sh
+
+image_name="${1:-tezos/opam-repository}"
 
 # Loop over images
 for tag_prefix in ${docker_images}
@@ -13,13 +14,13 @@ do
 
   # Loop over architectures
   amends=''
-  for docker_architecture in ${docker_architectures}
+  for TARGETARCH in ${docker_architectures}
   do
-    amends="${amends} --amend ${CI_REGISTRY_IMAGE}:${tag_prefix}--${docker_architecture}--${CI_COMMIT_SHA}"
+    amends="${amends} --amend ${image_name}:${tag_prefix}--${TARGETARCH}--${CI_COMMIT_SHA}"
   done
 
   # Because of the variable amends, we use eval here to first construct the command
   # by concatenating all the arguments together (space separated), then read and execute it
-  eval "docker manifest create ${CI_REGISTRY_IMAGE}:${tag_prefix}--${CI_COMMIT_SHA}${amends}"
-  docker manifest push "${CI_REGISTRY_IMAGE}:${tag_prefix}--${CI_COMMIT_SHA}"
+  eval "docker manifest create ${image_name}:${tag_prefix}--${CI_COMMIT_SHA}${amends}"
+  docker manifest push "${image_name}:${tag_prefix}--${CI_COMMIT_SHA}"
 done

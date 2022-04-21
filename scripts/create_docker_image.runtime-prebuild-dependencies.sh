@@ -8,11 +8,11 @@ cd "$repo_dir"
 # shellcheck source=scripts/version.sh
 . "$script_dir"/version.sh
 
-image_name="${1:-tezos_runtime-prebuild-dependencies}"
-image_version="${2:-latest}"
-runtime_dependencies_image="${3:?}"
-arch="${4:?}"
-targetarch="${5:?}"
+image_name="${1:-tezos/opam-repository}"
+image_tag="${2:-runtime-prebuild-dependencies}"
+runtime_dependencies_image="${3:-tezos/opam-repository:runtime-dependencies}"
+arch="${4:-x86_64}"
+targetarch="${5:-amd64}"
 
 "$script_dir"/build-libusb-hidapi.sh libusb "${arch}"
 "$script_dir"/build-libusb-hidapi.sh hidapi "${arch}"
@@ -28,5 +28,5 @@ docker build \
        --build-arg OCAML_VERSION="${ocaml_version}" \
        --build-arg RUST_VERSION="${rust_version}" \
        --build-arg TARGETARCH="${targetarch}" \
-       -t "$image_name:$image_version" \
+       -t "$image_name:$image_tag" \
        "$repo_dir"

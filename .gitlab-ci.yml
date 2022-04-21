@@ -19,73 +19,72 @@ stages:
     # Credentials for Docker registries
     - ./scripts/docker_registry_auth.sh
 
-# Build template is used by all build jobs
+# Template used by all Docker image build jobs
 # Variables needs to be set properly
 .build-template: &build-definition
   stage: build
   extends:
     - .image_template__docker
   variables:
-    ARCH: ""               # Used by `scripts/build-libusb-hidapi.sh` to build static packages
-    IMAGE_ARCH_PREFIX: ""  # Used for Docker image tags
-    TARGETARCH: ""         # Docker build argument for architecture specific instructions
+    ARCH: ""                     # Used by `scripts/build-libusb-hidapi.sh` to build static packages
+    TARGETARCH: ""               # Docker build argument for architecture specific instructions
+    DOCKER_IMAGE_TAG_SUFFIX: ""
   script:
     - . ./scripts/version.sh
     # Build docker images
-    - ./scripts/create_docker_image.sh "${CI_REGISTRY_IMAGE}" "${IMAGE_ARCH_PREFIX}${CI_COMMIT_SHA}" "${ARCH}" "${TARGETARCH}"
+    - ./scripts/create_docker_image.sh "${CI_REGISTRY_IMAGE}" "${DOCKER_IMAGE_TAG_SUFFIX}" "${ARCH}" "${TARGETARCH}"
     # Push docker images
-    - ./scripts/docker_push_all.sh "${IMAGE_ARCH_PREFIX}${CI_COMMIT_SHA}"
+    - ./scripts/docker_push_all.sh "${CI_REGISTRY_IMAGE}" "${DOCKER_IMAGE_TAG_SUFFIX}"
 
-# this step checks that all docker spec files using the tool hadolint
+# Dockerfile linter
 hadolint:
   image: hadolint/hadolint:v2.10.0-debian
   stage: lint
   script:
     - hadolint *Dockerfile
 
-# this step checks that all scripts pass shellcheck
+# POSIX shell scripts linter
 shellcheck:
   image: koalaman/shellcheck-alpine:v0.8.0
   stage: lint
   script:
     - shellcheck -x scripts/*.sh
 
-# this job builds the build docker images for amd64
+# Build docker images for x86_64/amd64
 build-amd64:
   <<: *build-definition
   variables:
     ARCH: "x86_64"
-    IMAGE_ARCH_PREFIX: "amd64--"
     TARGETARCH: "amd64"
+    DOCKER_IMAGE_TAG_SUFFIX: "--${TARGETARCH}--${CI_COMMIT_SHA}"
   only:
     - //@tezos/opam-repository
     - //@nomadic-labs/opam-repository
 
-# this job builds the build docker images for arm64
-# but the job is restricted to nomadic labs and arm64
-# it is used for development
+# Build docker images for arm64/v8
+# Only on Nomadic Labs' repositories and arm64 runners
 build-arm64:
   <<: *build-definition
   variables:
     ARCH: "aarch64"
-    IMAGE_ARCH_PREFIX: "arm64--"
     TARGETARCH: "arm64"
+    DOCKER_IMAGE_TAG_SUFFIX: "--${TARGETARCH}--${CI_COMMIT_SHA}"
   only:
     - //@tezos/opam-repository
     - //@nomadic-labs/opam-repository
   tags:
     - arm64
 
-# The job is triggered both when merging, and when developing
-# on Nomadic Labs' repository.
-# (Forks don't have the capacity to build arm64 images
-# and thus they don't have the capacity to merge the manifest either.)
+# Merge manifests from jobs build-amd64 and build-arm64
+# Only on Nomadic Labs' repositories
+# (Forks don't have the capacity to build arm64 images and thus they don't have the
+# capacity to merge the manifest either)
 manifest:
   stage: publish
   extends:
     - .image_template__docker
   script:
-    - ./scripts/docker_merge_manifests.sh
+    - ./scripts/docker_merge_manifests.sh "${CI_REGISTRY_IMAGE}"
   only:
     - //@tezos/opam-repository
     - //@nomadic-labs/opam-repository
@@ -100,13 +99,13 @@ mirror:
   variables:
     AWS_ECR_IMAGE: "${AWS_ECR}/${CI_PROJECT_PATH}"
   script:
-    - ./scripts/mirror_to_ecr.sh
+    - ./scripts/mirror_to_ecr.sh "${CI_REGISTRY_IMAGE}" "${AWS_ECR_IMAGE}"
   only:
     variables:
       # Only available on protected branches @nomadic-labs/opam-repository
       - $AWS_ACCESS_KEY_ID && $AWS_SECRET_ACCESS_KEY && $AWS_ECR
 
-# this is a duplicated job to allow fork to build amd64
+# Duplicated job to allow forks to build x86_64/amd64 images
 build:
   <<: *build-definition
   image: docker:20
@@ -116,7 +115,7 @@ build:
   variables:
     ARCH: "x86_64"
     # this variable is empty as we don't want to merge any manifest
-    IMAGE_ARCH_PREFIX: ""
+    DOCKER_IMAGE_TAG_SUFFIX: ""
   except:
     - //@tezos/opam-repository
     - //@nomadic-labs/opam-repository

@@ -6,10 +6,13 @@ set -eu
 # shellcheck source=./scripts/docker.sh
 . ./scripts/docker.sh
 
+image_name="${1:-tezos/opam-repository}"
+mirror_image_name="${2}"
+
 set -x
 
 for tag_prefix in ${docker_images}
 do
-  regctl image copy "${CI_REGISTRY_IMAGE}:${tag_prefix}--${CI_COMMIT_SHA}" \
-                    "${AWS_ECR_IMAGE}:${tag_prefix}--${CI_COMMIT_SHA}"
+  regctl image copy "${image_name}:${tag_prefix}--${CI_COMMIT_SHA}" \
+                    "${mirror_image_name}:${tag_prefix}--${CI_COMMIT_SHA}"
 done

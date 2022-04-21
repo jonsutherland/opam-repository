@@ -8,9 +8,9 @@ cd "$repo_dir"
 # shellcheck source=scripts/version.sh
 . "$script_dir"/version.sh
 
-image_name="${1:-tezos_runtime-build-test-dependencies}"
-image_version="${2:-latest}"
-runtime_build_dependencies_image="${3}"
+image_name="${1:-tezos/opam-repository}"
+image_version="${2:-runtime-build-test-dependencies}"
+runtime_build_dependencies_image="${3:-tezos/opam-repository:runtime-build-dependencies}"
 
 echo
 echo "### Building runtime-build-test-dependencies image"

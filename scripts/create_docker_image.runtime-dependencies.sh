@@ -8,8 +8,8 @@ cd "$repo_dir"
 # shellcheck source=scripts/version.sh
 . "$script_dir"/version.sh
 
-image_name="${1}"
-image_version="${2:-latest}"
+image_name="${1:-tezos/opam-repository}"
+image_tag="${2:-runtime-dependencies}"
 
 echo
 echo "### Building runtime-dependencies image"
@@ -19,6 +19,6 @@ echo
 docker build \
        -f runtime-dependencies.Dockerfile \
        --build-arg BUILD_IMAGE="alpine:${alpine_version}" \
-       --build-arg IMAGE_VERSION="${image_version}" \
-       -t "$image_name:$image_version" \
+       --build-arg IMAGE_VERSION="${image_tag}" \
+       -t "$image_name:$image_tag" \
        "$repo_dir"

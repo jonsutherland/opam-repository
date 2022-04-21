@@ -6,9 +6,10 @@ set -eu
 # shellcheck source=./scripts/docker.sh
 . ./scripts/docker.sh
 
-tag_suffix="${1}"
+image_name="${1:-tezos/opam-repository}"
+tag_suffix="${2:-}"
 
 for tag_prefix in ${docker_images}
 do
-  docker push "${CI_REGISTRY_IMAGE}:${tag_prefix}--${tag_suffix}"
+  docker push "${image_name}:${tag_prefix}${tag_suffix}"
 done
