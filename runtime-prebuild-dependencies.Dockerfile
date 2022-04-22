@@ -33,6 +33,9 @@ USER root
 
 WORKDIR /tmp
 
+# To verify remote files checksum (prevent tampering)
+COPY remote-files.sha256 .
+
 # hadolint ignore=DL3018
 RUN apk --no-cache add \
     autoconf \
@@ -42,6 +45,7 @@ RUN apk --no-cache add \
     build-base \
     ca-certificates \
     cargo \
+    coreutils \
     curl \
     eudev-dev \
     git \
@@ -67,10 +71,11 @@ RUN apk --no-cache add \
     hidapi-dev-0.9.0-r2.apk \
     libusb-1.0.24-r2.apk \
     libusb-dev-1.0.24-r2.apk \
-# Ultimate Packer for eXecutables, install manually to get current multi-arch release
+# Install UPX manually to get current multi-arch release
 # https://upx.github.io/
  && curl -fsSL https://github.com/upx/upx/releases/download/v3.96/upx-3.96-${TARGETARCH}_linux.tar.xz \
     -o upx-3.96-${TARGETARCH}_linux.tar.xz \
+ && sha256sum --check --ignore-missing remote-files.sha256 \
  && tar -xf upx-3.96-${TARGETARCH}_linux.tar.xz \
  && mv upx-3.96-${TARGETARCH}_linux/upx /usr/local/bin/upx \
  && chmod 755 /usr/local/bin/upx \

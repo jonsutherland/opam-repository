@@ -25,12 +25,25 @@ SHELL ["/bin/ash", "-o", "pipefail", "-c"]
 
 USER root
 
-# hadolint ignore=DL3018
+WORKDIR /tmp
+
+# To verify remote files checksum (prevent tampering)
+COPY remote-files.sha256 .
+
+# hadolint ignore=DL3018,SC2046
 RUN apk --no-cache add \
-        py3-pip python3 python3-dev coreutils \
+        py3-pip python3 python3-dev  \
         py3-sphinx py3-sphinx_rtd_theme \
-        libffi-dev && \
-        if [ "$(arch)" = "x86_64" ]; then apk --no-cache add shellcheck; fi
+        libffi-dev \
+ # Install shellcheck manually to get current multi-arch release
+ # https://www.shellcheck.net/
+ && curl -fsSL https://github.com/koalaman/shellcheck/releases/download/v0.8.0/shellcheck-v0.8.0.linux.$(arch).tar.xz \
+    -o shellcheck-v0.8.0.linux.$(arch).tar.xz \
+ && sha256sum --check --ignore-missing remote-files.sha256 \
+ && tar -xf shellcheck-v0.8.0.linux.$(arch).tar.xz \
+ && mv shellcheck-v0.8.0/shellcheck /usr/local/bin/shellcheck \
+ && chmod 755 /usr/local/bin/shellcheck \
+ && rm -rf /tmp/*
 
 USER tezos
 WORKDIR /home/tezos
