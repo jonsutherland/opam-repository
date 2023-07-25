@@ -47,9 +47,9 @@ post-messages: [
 patches: ["alt-signal-stack.patch"]
 extra-source "alt-signal-stack.patch" {
   src:
-    "https://github.com/ocaml/ocaml/commit/1eeb0e7fe595f5f9e1ea1edbdf785ff3b49feeeb.patch"
+    "https://github.com/ocaml/ocaml/commit/1eeb0e7fe595f5f9e1ea1edbdf785ff3b49feeeb.patch?full_index=1"
   checksum: [
-    "sha256=59de25b95409c1927c4b607fb4b1218ff7623fca45474448c8e114a42853e3ad"
-    "sha512=19c7d19be804110e968866b4355871cdeb23bd4d56c18288bc0040d59702b7ee541e8bb6d49f64fa3b5a1232b50821efb50cd17544d3a2d20d760dece69e67c7"
+    "sha256=7b23f163461d1ca7305a132edc5f014d5dc0d2b1027a34292043c7a3d1d43db9"
+    "sha512=cfec3d5c4262f389e5a587a5a88967b1b7b41f5121a1df581a36741c4f5081c57c1f415723d856c4f6b291ad63ec820de03cf0482e86eb8422b4f69e2b8d6fa2"
   ]
 }
